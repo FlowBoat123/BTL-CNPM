@@ -5,27 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đặt Lịch Hẹn</title>
     <link rel="stylesheet" href="styles.css">
+
+    <!-- FullCalendar CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
 </head>
 <body>
     <div class="container">
-        <h2>Đặt Lịch Hẹn</h2>
-        <form id="appointmentForm">
-            <label for="name">Họ và Tên:</label>
-            <input type="text" id="name" required>
-
-            <label for="date">Ngày:</label>
-            <input type="date" id="date" required>
-
-            <label for="time">Giờ:</label>
-            <input type="time" id="time" required>
-
-            <button type="submit">Đặt Lịch</button>
-        </form>
-
-        <h3>Lịch Hẹn Của Bạn</h3>
-        <ul id="appointmentList"></ul>
+        <h2>Chọn Ngày Để Đặt Lịch</h2>
+        <div id="calendar"></div>
     </div>
 
+    <!-- Popup nhập thông tin -->
+    <div id="appointmentModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Thông Tin Lịch Hẹn</h3>
+            <form id="appointmentForm">
+                <label for="name">Họ và Tên:</label>
+                <input type="text" id="name" required>
+
+                <label for="time">Chọn Giờ:</label>
+                <select id="time" required>
+                    <option value="08:00">08:00</option>
+                    <option value="09:00">09:00</option>
+                    <option value="10:00">10:00</option>
+                    <option value="14:00">14:00</option>
+                    <option value="15:00">15:00</option>
+                    <option value="16:00">16:00</option>
+                </select>
+
+                <button type="submit">Đặt Lịch</button>
+            </form>
+        </div>
+    </div>
+
+    <h3>Lịch Hẹn Của Bạn</h3>
+    <ul id="appointmentList"></ul>
+
+    <!-- Dialogflow Messenger -->
+    <df-messenger
+      intent="WELCOME"
+      chat-title="Trợ Lý Đặt Lịch"
+      agent-id="68444991-08e7-47f3-8ad2-bd89bdc3863f"
+      language-code="vi">
+    </df-messenger>
+
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
     <script src="script.js"></script>
+
+    <!-- Dialogflow Messenger Script -->
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
 </body>
 </html>
