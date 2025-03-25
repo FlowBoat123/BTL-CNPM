@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phòng khám Nha Khoa An Khánh - Lịch làm việc</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <a href="index.html">Phòng khám Nha Khoa <br />An Khánh</a>
+      </div>
+      <div class="header-right">
+        <nav>
+          <ul>
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="about.html">Về chúng tôi</a></li>
+            <li><a href="services.html">Dịch vụ khám</a></li>
+            <li><a href="doctor.html">Bác sĩ</a></li>
+            <li>
+              <a href="schedule.html">
+                <button class="booking-btn">Đặt lịch ngay</button>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content: Lịch làm việc theo tuần -->
+    <div class="container">
+      <div class="main-content">
+        <h1>Lịch làm việc theo tuần</h1>
+        <div class="calendar">
+          <div class="calendar-header">
+            <button id="prev-week">◀</button>
+            <h2 id="week-title">Tuần này</h2>
+            <button id="next-week">▶</button>
+          </div>
+          <table class="calendar-table">
+            <thead>
+              <tr>
+                <th>Giờ</th>
+                <th>Thứ 2</th>
+                <th>Thứ 3</th>
+                <th>Thứ 4</th>
+                <th>Thứ 5</th>
+                <th>Thứ 6</th>
+                <th>Thứ 7</th>
+                <th>Chủ nhật</th>
+              </tr>
+            </thead>
+            <tbody id="calendar-body">
+              <!-- Hàng 08:00 -->
+              <tr>
+                <td>08:00</td>
+                <td class="time-slot" data-day="Thứ 2" data-time="08:00"></td>
+                <td class="time-slot" data-day="Thứ 3" data-time="08:00"></td>
+                <td class="time-slot" data-day="Thứ 4" data-time="08:00"></td>
+                <td class="time-slot" data-day="Thứ 5" data-time="08:00"></td>
+                <td class="time-slot" data-day="Thứ 6" data-time="08:00"></td>
+                <td class="time-slot" data-day="Thứ 7" data-time="08:00"></td>
+                <td
+                  class="time-slot"
+                  data-day="Chủ nhật"
+                  data-time="08:00"
+                ></td>
+              </tr>
+              <!-- Hàng 09:00 -->
+              <tr>
+                <td>09:00</td>
+                <td class="time-slot" data-day="Thứ 2" data-time="09:00"></td>
+                <td class="time-slot" data-day="Thứ 3" data-time="09:00"></td>
+                <td class="time-slot" data-day="Thứ 4" data-time="09:00"></td>
+                <td class="time-slot" data-day="Thứ 5" data-time="09:00"></td>
+                <td class="time-slot" data-day="Thứ 6" data-time="09:00"></td>
+                <td class="time-slot" data-day="Thứ 7" data-time="09:00"></td>
+                <td
+                  class="time-slot"
+                  data-day="Chủ nhật"
+                  data-time="09:00"
+                ></td>
+              </tr>
+              <!-- Hàng 10:00 -->
+              <tr>
+                <td>10:00</td>
+                <td class="time-slot" data-day="Thứ 2" data-time="10:00"></td>
+                <td class="time-slot" data-day="Thứ 3" data-time="10:00"></td>
+                <td class="time-slot" data-day="Thứ 4" data-time="10:00"></td>
+                <td class="time-slot" data-day="Thứ 5" data-time="10:00"></td>
+                <td class="time-slot" data-day="Thứ 6" data-time="10:00"></td>
+                <td class="time-slot" data-day="Thứ 7" data-time="10:00"></td>
+                <td
+                  class="time-slot"
+                  data-day="Chủ nhật"
+                  data-time="10:00"
+                ></td>
+              </tr>
+              <!-- Hàng 11:00 -->
+              <tr>
+                <td>11:00</td>
+                <td class="time-slot" data-day="Thứ 2" data-time="11:00"></td>
+                <td class="time-slot" data-day="Thứ 3" data-time="11:00"></td>
+                <td class="time-slot" data-day="Thứ 4" data-time="11:00"></td>
+                <td class="time-slot" data-day="Thứ 5" data-time="11:00"></td>
+                <td class="time-slot" data-day="Thứ 6" data-time="11:00"></td>
+                <td class="time-slot" data-day="Thứ 7" data-time="11:00"></td>
+                <td
+                  class="time-slot"
+                  data-day="Chủ nhật"
+                  data-time="11:00"
+                ></td>
+              </tr>
+              <!-- Hàng 12:00 -->
+              <tr>
+                <td>12:00</td>
+                <td class="time-slot" data-day="Thứ 2" data-time="12:00"></td>
+                <td class="time-slot" data-day="Thứ 3" data-time="12:00"></td>
+                <td class="time-slot" data-day="Thứ 4" data-time="12:00"></td>
+                <td class="time-slot" data-day="Thứ 5" data-time="12:00"></td>
+                <td class="time-slot" data-day="Thứ 6" data-time="12:00"></td>
+                <td class="time-slot" data-day="Thứ 7" data-time="12:00"></td>
+                <td
+                  class="time-slot"
+                  data-day="Chủ nhật"
+                  data-time="12:00"
+                ></td>
+              </tr>
+              <!-- Hàng 13:00 -->
+              <tr>
+                <td>13:00</td>
+                <td class="time-slot" data-day="Thứ 2" data-time="13:00"></td>
+                <td class="time-slot" data-day="Thứ 3" data-time="13:00"></td>
+                <td class="time-slot" data-day="Thứ 4" data-time="13:00"></td>
+                <td class="time-slot" data-day="Thứ 5" data-time="13:00"></td>
+                <td class="time-slot" data-day="Thứ 6" data-time="13:00"></td>
+                <td class="time-slot" data-day="Thứ 7" data-time="13:00"></td>
+                <td
+                  class="time-slot"
+                  data-day="Chủ nhật"
+                  data-time="13:00"
+                ></td>
+              </tr>
+              <!-- Hàng 14:00 -->
+              <tr>
+                <td>14:00</td>
+                <td class="time-slot" data-day="Thứ 2" data-time="14:00"></td>
+                <td class="time-slot" data-day="Thứ 3" data-time="14:00"></td>
+                <td class="time-slot" data-day="Thứ 4" data-time="14:00"></td>
+                <td class="time-slot" data-day="Thứ 5" data-time="14:00"></td>
+                <td class="time-slot" data-day="Thứ 6" data-time="14:00"></td>
+                <td class="time-slot" data-day="Thứ 7" data-time="14:00"></td>
+                <td
+                  class="time-slot"
+                  data-day="Chủ nhật"
+                  data-time="14:00"
+                ></td>
+              </tr>
+              <!-- Hàng 15:00 -->
+              <tr>
+                <td>15:00</td>
+                <td class="time-slot" data-day="Thứ 2" data-time="15:00"></td>
+                <td class="time-slot" data-day="Thứ 3" data-time="15:00"></td>
+                <td class="time-slot" data-day="Thứ 4" data-time="15:00"></td>
+                <td class="time-slot" data-day="Thứ 5" data-time="15:00"></td>
+                <td class="time-slot" data-day="Thứ 6" data-time="15:00"></td>
+                <td class="time-slot" data-day="Thứ 7" data-time="15:00"></td>
+                <td
+                  class="time-slot"
+                  data-day="Chủ nhật"
+                  data-time="15:00"
+                ></td>
+              </tr>
+              <!-- Hàng 16:00 -->
+              <tr>
+                <td>16:00</td>
+                <td class="time-slot" data-day="Thứ 2" data-time="16:00"></td>
+                <td class="time-slot" data-day="Thứ 3" data-time="16:00"></td>
+                <td class="time-slot" data-day="Thứ 4" data-time="16:00"></td>
+                <td class="time-slot" data-day="Thứ 5" data-time="16:00"></td>
+                <td class="time-slot" data-day="Thứ 6" data-time="16:00"></td>
+                <td class="time-slot" data-day="Thứ 7" data-time="16:00"></td>
+                <td
+                  class="time-slot"
+                  data-day="Chủ nhật"
+                  data-time="16:00"
+                ></td>
+              </tr>
+              <!-- Hàng 17:00 -->
+              <tr>
+                <td>17:00</td>
+                <td class="time-slot" data-day="Thứ 2" data-time="17:00"></td>
+                <td class="time-slot" data-day="Thứ 3" data-time="17:00"></td>
+                <td class="time-slot" data-day="Thứ 4" data-time="17:00"></td>
+                <td class="time-slot" data-day="Thứ 5" data-time="17:00"></td>
+                <td class="time-slot" data-day="Thứ 6" data-time="17:00"></td>
+                <td class="time-slot" data-day="Thứ 7" data-time="17:00"></td>
+                <td
+                  class="time-slot"
+                  data-day="Chủ nhật"
+                  data-time="17:00"
+                ></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Chứa cả form đặt lịch và hiển thị chi tiết lịch đã đặt -->
+    <div id="appointment-modal" class="modal">
+      <div class="modal-content">
+        <!-- Container cho form đặt lịch -->
+        <div id="form-container">
+          <span class="close">&times;</span>
+          <h2>Thông tin lịch khám</h2>
+          <form id="appointment-form">
+            <label for="patient-name">Họ và tên bệnh nhân:</label>
+            <input type="text" id="patient-name" required />
+
+            <label for="service">Dịch vụ khám:</label>
+            <select id="service" required>
+              <option value="">--Chọn dịch vụ--</option>
+              <option value="trồng răng sứ">Trồng răng sứ</option>
+              <option value="nhổ răng">Nhổ răng</option>
+              <option value="răng thẩm mỹ">Răng thẩm mỹ</option>
+            </select>
+
+            <label for="appointment-day">Ngày khám:</label>
+            <input type="text" id="appointment-day" readonly />
+
+            <label for="appointment-time">Giờ khám:</label>
+            <select id="appointment-time" required>
+              <option value="08:00">08:00</option>
+              <option value="09:00">09:00</option>
+              <option value="10:00">10:00</option>
+              <option value="11:00">11:00</option>
+              <option value="12:00">12:00</option>
+              <option value="13:00">13:00</option>
+              <option value="14:00">14:00</option>
+              <option value="15:00">15:00</option>
+              <option value="16:00">16:00</option>
+              <option value="17:00">17:00</option>
+            </select>
+
+            <label for="appointment-note">Ghi chú (triệu chứng):</label>
+            <textarea id="appointment-note" rows="3"></textarea>
+
+            <button type="submit">Lưu lịch</button>
+          </form>
+        </div>
+        <!-- Container cho chi tiết lịch đã đặt -->
+        <div id="details-container" style="display: none">
+          <span class="close">&times;</span>
+          <h2>Thông tin đã đặt</h2>
+          <div id="details-content"></div>
+          <button id="close-details">Đóng</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3>Về chúng tôi</h3>
+          <p>
+            Phòng khám của chúng tôi cung cấp dịch vụ nha khoa chất lượng cao,
+            mang đến nụ cười tự tin cho khách hàng.
+          </p>
+        </div>
+        <div class="footer-column">
+          <h3>Liên hệ</h3>
+          <p>Địa chỉ: Thị trấn Văn Giang, Huyện Văn Giang, Hưng Yên</p>
+          <p>Hotline: 0123 456 789</p>
+          <p>Email: contact@phongkham.com</p>
+        </div>
+      </div>
+    </footer>
+    <script src="main.js"></script>
+  </body>
+</html>

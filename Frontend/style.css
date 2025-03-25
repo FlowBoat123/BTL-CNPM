@@ -1,0 +1,670 @@
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Căn chỉnh body */
+body {
+  background-color: #fefefe;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between; /* Giữ logo bên trái, menu + nút về bên phải */
+  align-items: center;
+  padding: 15px 50px;
+  background-color: #f0f0f0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+/* Logo */
+.logo {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.logo a {
+  text-decoration: none;
+  color: #000;
+}
+
+/* Nhóm chứa menu và nút đặt lịch */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* Tạo khoảng cách giữa menu và nút đặt lịch */
+}
+
+/* Menu */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px; /* Tạo khoảng cách giữa các mục menu */
+  padding: 0;
+  margin: 0;
+  position: relative;
+  z-index: 1100;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+/* Button đặt lịch (đã cập nhật) */
+.booking-btn {
+  background-color: #4097fa;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  position: relative;
+  z-index: 900;
+}
+
+.booking-btn:hover {
+  background-color: #007bff;
+  transform: scale(1.05);
+}
+
+/* Trang chủ */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  max-width: 1200px;
+  margin: 100px auto 50px auto;
+  scroll-margin-top: 100px;
+  height: 80vh;
+}
+
+.hero-content {
+  max-width: 50%;
+}
+
+/* Logo phòng khám */
+.clinic-logo {
+  width: 80px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+h1 span {
+  color: #4097fa;
+}
+
+p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Hình ảnh bác sĩ */
+.hero-image img {
+  width: 100%;
+  max-width: 500px;
+}
+
+/* -------------------------------------------------------------------------------------- */
+/* Vùng bao bọc nội dung (giới hạn chiều rộng) */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* SECTION - Về chúng tôi */
+.about-section {
+  background-color: #d7d7d7; /* Màu nền xám nhạt như ảnh */
+  padding: 40px 0;
+  scroll-margin-top: 50px;
+  height: 100vh;
+}
+
+/* Tiêu đề "Về chúng tôi" */
+.section-title {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #000; /* Màu chữ đen */
+}
+
+/* Khối hiển thị 3 cột (3 thẻ dịch vụ) */
+.cards {
+  display: flex;
+  flex-wrap: wrap; /* Để khi màn hình nhỏ sẽ tự xuống hàng */
+  gap: 20px; /* Khoảng cách giữa các thẻ */
+  justify-content: space-between;
+}
+
+/* Mỗi thẻ (card) dịch vụ */
+.card {
+  background-color: #fff;
+  width: calc(33.333% - 13.333px); /* 3 thẻ chia đều, trừ khoảng cách */
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Trường hợp màn hình nhỏ (mobile) xếp dọc */
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+  }
+}
+
+/* Tiêu đề "Nha khoa không đau" (nếu cần) */
+.pain-free-title {
+  font-size: 24px;
+  color: #007bff;
+  text-align: center;
+  margin: 16px 0 0 0;
+}
+
+/* Ảnh đại diện trên mỗi thẻ */
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Nội dung của thẻ */
+.card-content {
+  padding: 15px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-content h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.card-content p {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Nút "Đọc thêm" */
+.read-more {
+  display: inline-block;
+  text-decoration: none;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #333;
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.read-more:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.read-more::after {
+  content: " >";
+  font-weight: normal;
+}
+
+/* ----------------------------------------------------------------------------- */
+/* Khung chứa nội dung */
+.container-1 {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  scroll-margin-top: 70px;
+  height: 100vh;
+}
+
+/* Tiêu đề chính */
+.section-title-1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 30px;
+}
+
+/* Mỗi khối thông tin bác sĩ */
+.doctor-profile {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.doctor-info {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.doctor-info p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.doctor-image img {
+  max-width: 200px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+  .doctor-profile {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .doctor-info {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+}
+
+/* -------------------------------------------------------------------------------- */
+/* Phần dịch vụ */
+.services-section {
+  background-color: #d7d7d7;
+  padding: 40px 20px;
+  border-radius: 8px;
+  text-align: center;
+  scroll-margin-top: 60px;
+  height: 65vh;
+}
+
+.services-section h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.services-section p.subheading {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+.service-card {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.service-card img {
+  max-width: 100px;
+  margin-bottom: 20px;
+}
+
+.service-card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  color: #007bff;
+}
+
+.service-card p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.service-card a.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 2px solid #007bff;
+  color: #007bff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.service-card a.btn:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.service-card.featured {
+  border: 2px solid #007bff;
+  background-color: #e8f4ff;
+}
+
+/* Footer */
+footer {
+  background-color: #609aff;
+  padding: 20px;
+  margin-top: 0;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.footer-column {
+  flex: 1 1 300px;
+  margin: 10px;
+}
+
+.footer-column h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.footer-column p {
+  font-size: 14px;
+  color: #fff;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .footer-container {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Phần CSS dành cho trang đặt lịch (Schedule) */
+
+/* Calendar Container */
+.calendar {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 120px; /* Để tránh header cố định */
+}
+
+/* Calendar Header */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.calendar-header h2 {
+  margin: 0;
+  font-size: 22px;
+  color: #333;
+}
+
+.calendar-header button {
+  padding: 8px 16px;
+  background-color: #4097fa;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.calendar-header button:hover {
+  background-color: #007bff;
+}
+
+/* Calendar Table */
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calendar-table th,
+.calendar-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  vertical-align: top;
+  min-width: 100px;
+  height: 100px;
+  position: relative;
+  transition: background 0.3s;
+}
+
+.calendar-table td:hover {
+  background: #f0f0f0;
+}
+
+.time-slot {
+  cursor: pointer;
+}
+
+/* Đánh dấu lịch đã đặt */
+.appointment-marked {
+  background-color: #16a085;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+  text-align: left;
+}
+
+/* Nút đóng modal */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.3s;
+}
+
+.close:hover {
+  color: #333;
+}
+
+/* Form Container */
+#form-container {
+  display: block;
+}
+
+/* Form đặt lịch */
+#appointment-form {
+  display: flex;
+  flex-direction: column;
+}
+
+#appointment-form label {
+  margin: 10px 0 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+#appointment-form input[type="text"],
+#appointment-form select,
+#appointment-form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+#appointment-form textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+#appointment-form button {
+  background-color: #4097fa;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+#appointment-form button:hover {
+  background-color: #007bff;
+  transform: scale(1.02);
+}
+
+/* Details Container (hiển thị thông tin lịch đã đặt) */
+#details-container {
+  display: none;
+}
+
+#details-container h2 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+#details-content p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: #555;
+}
+
+#close-details {
+  background-color: #4097fa;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  width: 100%;
+  margin-top: 15px;
+}
+
+#close-details:hover {
+  background-color: #007bff;
+  transform: scale(1.02);
+}
+/* -------------------------------------------------------------------------- */
+/* Thông báo đặt lịch thành công */
+.success-message {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #4caf50;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.success-message.show {
+  display: flex;
+  opacity: 1;
+}
+
+.close-success {
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: auto;
+  padding: 0 10px;
+  transition: color 0.3s;
+}
+
+.close-success:hover {
+  color: #ffdddd;
+}
