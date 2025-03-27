@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <!-- Link tới file CSS -->
+    <link rel="stylesheet" href="/css/login.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <!-- Cột bên trái (hình ảnh bác sĩ) -->
+      <div class="left-container">
+        <div class="image-overlay">
+          <img
+            src="/images/101f047ffc9ede8739537a0f4a5c970e.png"
+            alt="Doctor"
+            class="left-image"
+          />
+        </div>
+      </div>
+
+      <!-- Cột bên phải (form đăng nhập) -->
+      <div class="right-container">
+        <div class="form-wrapper">
+          <h2>Đăng Nhập</h2>
+
+          <!-- Nút đăng nhập với Google (chưa tích hợp thật, chỉ là giao diện) -->
+          <button class="google-button">
+            <img
+              src="https://www.svgrepo.com/show/475656/google-color.svg"
+              alt="Google Logo"
+            />
+            Đăng nhập với Google
+          </button>
+
+          <div class="divider">
+            <span>HOẶC</span>
+          </div>
+
+          <!-- Form đăng nhập -->
+          <form id="loginForm">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                required
+              />
+            </div>
+
+            <div class="form-options">
+              <div class="remember-me">
+                <input type="checkbox" id="remember" />
+                <label for="remember">Nhớ thông tin đăng nhập</label>
+              </div>
+              <a href="#" class="forgot-password">Quên mật khẩu?</a>
+            </div>
+
+            <button type="submit" class="login-button">Đăng nhập</button>
+          </form>
+
+          <p class="contact-admin">
+            Bạn chưa có tài khoản? <br />
+            Vui lòng liên hệ Admin!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Link tới file JS (nếu có) -->
+    <script src="/javascript/login.js"></script>
+  </body>
+</html>

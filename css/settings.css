@@ -1,0 +1,186 @@
+/* ================= RESET & CHUNG ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f2f2f2;
+  display: flex; /* ⚡ Giữ sidebar bên trái, nội dung bên phải */
+}
+
+/* ================= SIDEBAR (CỐ ĐỊNH BÊN TRÁI) ================= */
+.sidebar {
+  width: 250px;
+  height: 100vh; /* Kéo dài sidebar hết chiều cao */
+  background-color: #2c3e50;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 10px 0;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+  display: block;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.sidebar ul li a:hover {
+  background-color: #34495e;
+}
+
+/* ================= CĂN GIỮA FORM ================= */
+.main-content {
+  margin-left: 250px; /* Dịch nội dung chính sang phải tránh che sidebar */
+  width: calc(100% - 250px); /* Đảm bảo không bị tràn màn hình */
+  display: flex;
+  justify-content: center; /* ⚡ Căn giữa theo chiều ngang */
+  align-items: center; /* ⚡ Căn giữa theo chiều dọc */
+  padding: 70px 20px 20px;
+  background-color: #ecf0f1;
+  overflow-y: auto;
+}
+
+/* ================= KHUNG ẢNH ĐẠI DIỆN ================= */
+.avatar-container {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 20px auto; /* căn giữa và cách dưới 20px */
+  position: relative;
+  cursor: pointer;
+  border: 3px solid #2980b9;
+}
+
+.avatar-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Ẩn input file nhưng vẫn kích hoạt được khi click vào khung avatar */
+.avatar-container input[type="file"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* ================= FORM CÀI ĐẶT ================= */
+form {
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 700px; /* ⚡ Giữ form có kích thước vừa phải */
+}
+
+/* Tiêu đề */
+h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+/* Fieldset (nhóm form) */
+fieldset {
+  border: none;
+  margin-bottom: 15px;
+  padding: 15px;
+  background: #ecf0f1;
+  border-radius: 8px;
+}
+
+legend {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+/* Label & Input */
+label {
+  display: block;
+  font-weight: bold;
+  margin: 10px 0 5px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #bdc3c7;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* Nhóm nút */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.button-group button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  color: white;
+}
+
+.save-btn {
+  background-color: #2ecc71;
+}
+
+.cancel-btn {
+  background-color: #e74c3c;
+}
+
+.button-group button:hover {
+  opacity: 0.8;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+    height: auto;
+    align-items: flex-start;
+    padding-top: 50px;
+  }
+
+  form {
+    max-width: 90%;
+  }
+}

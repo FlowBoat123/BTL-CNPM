@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cài đặt tài khoản</title>
+    <link rel="stylesheet" href="/css/settings.css" />
+  </head>
+  <body>
+    <!-- ✅ Sidebar -->
+    <nav class="sidebar">
+      <h2>Quản lý lịch</h2>
+      <ul>
+        <li><a href="index.html">Trang chủ</a></li>
+        <li><a href="schedule.html">Lịch làm việc</a></li>
+        <li><a href="settings.html" class="active">Cài đặt</a></li>
+        <li><a href="logout.html">Đăng xuất</a></li>
+      </ul>
+    </nav>
+
+    <!-- ✅ Nội dung chính -->
+    <div class="main-content">
+      <form id="settingsForm">
+        <!-- Khung cập nhật ảnh đại diện -->
+        <div class="avatar-container" id="avatarContainer">
+          <img src="/images/default-avatar.png" id="avatarPreview" />
+          <input type="file" id="avatarInput" accept="image/*" />
+        </div>
+
+        <!-- 1️⃣ Thông tin cá nhân -->
+        <fieldset>
+          <legend>Thông tin cá nhân</legend>
+          <label for="fullname">Họ và tên:</label>
+          <input type="text" id="fullname" name="fullname" required />
+
+          <label for="dob">Ngày sinh:</label>
+          <input type="date" id="dob" name="dob" required />
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="phone">Số điện thoại:</label>
+          <input type="tel" id="phone" name="phone" required />
+
+          <label for="certificates">Bằng cấp / Chứng chỉ hành nghề:</label>
+          <textarea id="certificates" name="certificates" rows="3"></textarea>
+        </fieldset>
+
+        <!-- 2️⃣ Đổi mật khẩu -->
+        <fieldset>
+          <legend>Đổi mật khẩu</legend>
+          <label for="current-password">Mật khẩu hiện tại:</label>
+          <input
+            type="password"
+            id="current-password"
+            name="current-password"
+            required
+          />
+
+          <label for="new-password">Mật khẩu mới:</label>
+          <input
+            type="password"
+            id="new-password"
+            name="new-password"
+            required
+          />
+
+          <label for="confirm-password">Xác nhận mật khẩu mới:</label>
+          <input
+            type="password"
+            id="confirm-password"
+            name="confirm-password"
+            required
+          />
+        </fieldset>
+
+        <!-- 3️⃣ Nút thao tác -->
+        <div class="button-group">
+          <button type="submit" class="save-btn">Lưu thông tin</button>
+          <button type="reset" class="cancel-btn">Hủy</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="/javascript/settings.js"></script>
+  </body>
+</html>

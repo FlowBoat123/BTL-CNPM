@@ -1,0 +1,22 @@
+/* Trang đăng xuất có thể đơn giản, chỉ cần hiệu ứng nhỏ */
+.logout-message {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-top: 50px;
+}
+
+.logout-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #e74c3c;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #c0392b;
+}
