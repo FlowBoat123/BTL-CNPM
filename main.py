@@ -41,6 +41,7 @@ BASE_URL = os.getenv("BASE_URL", "http://localhost:5000")
 # ====================== DEEPSEEK API CONFIG ======================
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 DEEPSEEK_API_URL = "https://api.deepseek.com/chat/completions"
+DEEPSEEK_API_TIMEOUT = 4.5  # seconds
 
 if not DEEPSEEK_API_KEY:
     logging.warning("⚠️  DEEPSEEK_API_KEY not found in environment variables")
@@ -53,41 +54,45 @@ SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 SENDGRID_FROM_EMAIL = os.getenv("SENDGRID_FROM_EMAIL", "hienctcom@gmail.com")
 VERIFICATION_LINK_BASE = os.getenv("VERIFICATION_LINK_BASE", "http://localhost:5000")
 
+def _call_deepseek_api(system_message, question):
+    """Shared helper that calls the Deepseek chat API and returns the reply text."""
+    if not DEEPSEEK_API_KEY:
+        return "Lỗi: API key chưa được cấu hình. Vui lòng kiểm tra DEEPSEEK_API_KEY."
+
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {DEEPSEEK_API_KEY}"
+    }
+
+    payload = {
+        "model": "deepseek-chat",
+        "messages": [
+            {"role": "system", "content": system_message},
+            {"role": "user", "content": question}
+        ],
+        "temperature": 0.7,
+        "max_tokens": 200
+    }
+
+    response = requests.post(DEEPSEEK_API_URL, headers=headers, json=payload, timeout=DEEPSEEK_API_TIMEOUT)
+    response.raise_for_status()
+
+    result = response.json()
+    choices = result.get("choices")
+    if choices and len(choices) > 0:
+        return choices[0]["message"]["content"]
+    logging.warning("⚠️  No choices in Deepseek response")
+    return None
+
 def get_answer_from_deepseek(question):
     """Gọi Deepseek API để trả lời câu hỏi về nha khoa"""
     try:
-        if not DEEPSEEK_API_KEY:
-            return "Lỗi: API key chưa được cấu hình. Vui lòng kiểm tra DEEPSEEK_API_KEY."
-        
-        headers = {
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {DEEPSEEK_API_KEY}"
-        }
-        
         system_message = "Bạn là trợ lý tư vấn nha khoa. Trả lời ngắn gọn 1 câu. Kết thúc bằng: 'Liên hệ phòng khám An Khánh: 0123456789 để được tư vấn chi tiết.'"
-        
-        payload = {
-            "model": "deepseek-chat",
-            "messages": [
-                {"role": "system", "content": system_message},
-                {"role": "user", "content": question}
-            ],
-            "temperature": 0.7,
-            "max_tokens": 200
-        }
-        
-        response = requests.post(DEEPSEEK_API_URL, headers=headers, json=payload, timeout=4.5)
-        response.raise_for_status()
-        
-        result = response.json()
-        if result.get("choices") and len(result["choices"]) > 0:
-            answer = result["choices"][0]["message"]["content"]
+        answer = _call_deepseek_api(system_message, question)
+        if answer:
             logging.info(f"✅ Deepseek API response received for question: {question[:50]}...")
             return answer
-        else:
-            logging.warning("⚠️  No choices in Deepseek response")
-            return "Xin lỗi, hệ thống đang bận. Vui lòng liên hệ 0123456789 để được tư vấn trực tiếp."
-    
+        return "Xin lỗi, hệ thống đang bận. Vui lòng liên hệ 0123456789 để được tư vấn trực tiếp."
     except requests.Timeout:
         logging.error("❌ Deepseek API timeout")
         return "Hệ thống đang bận. Để được tư vấn nhanh, vui lòng liên hệ phòng khám An Khánh: 0123456789"
@@ -104,38 +109,12 @@ def get_answer_from_deepseek(question):
 def get_clinic_info_from_deepseek(question):
     """Gọi Deepseek API để trả lời câu hỏi về phòng khám An Khánh"""
     try:
-        if not DEEPSEEK_API_KEY:
-            return "Lỗi: API key chưa được cấu hình. Vui lòng kiểm tra DEEPSEEK_API_KEY."
-        
-        headers = {
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {DEEPSEEK_API_KEY}"
-        }
-        
         system_message = "Bạn là trợ lý phòng khám nha khoa An Khánh ở Hà Nội. Dịch vụ: niềng răng, răng sứ, Implant, nhổ răng khôn. 4 bác sĩ: Hiển, Duy, Đăng, Đức. Hotline: 0123456789. Trả lời ngắn gọn 1-2 câu."
-        
-        payload = {
-            "model": "deepseek-chat",
-            "messages": [
-                {"role": "system", "content": system_message},
-                {"role": "user", "content": question}
-            ],
-            "temperature": 0.7,
-            "max_tokens": 200
-        }
-        
-        response = requests.post(DEEPSEEK_API_URL, headers=headers, json=payload, timeout=4.5)
-        response.raise_for_status()
-        
-        result = response.json()
-        if result.get("choices") and len(result["choices"]) > 0:
-            answer = result["choices"][0]["message"]["content"]
+        answer = _call_deepseek_api(system_message, question)
+        if answer:
             logging.info(f"✅ Deepseek API response received for clinic info question: {question[:50]}...")
             return answer
-        else:
-            logging.warning("⚠️  No choices in Deepseek response")
-            return "Phòng khám An Khánh - Hà Nội. Dịch vụ: niềng răng, răng sứ, Implant, nhổ răng khôn. 4 bác sĩ: Hiển, Duy, Đăng, Đức. Hotline: 0123456789"
-    
+        return "Phòng khám An Khánh - Hà Nội. Dịch vụ: niềng răng, răng sứ, Implant, nhổ răng khôn. 4 bác sĩ: Hiển, Duy, Đăng, Đức. Hotline: 0123456789"
     except requests.Timeout:
         logging.error("❌ Deepseek API timeout")
         return "Phòng khám An Khánh - Hà Nội. Dịch vụ: niềng răng, răng sứ, Implant, nhổ răng khôn. 4 bác sĩ: Hiển, Duy, Đăng, Đức. Hotline: 0123456789"
@@ -166,17 +145,18 @@ def get_weather(location):
     except requests.RequestException as e:
         return f"Không thể lấy thông tin thời tiết cho {location}. Vui lòng thử lại! Error: {str(e)}"
 
+_DAYS_MAPPING = {
+    "Monday": "Thứ 2",
+    "Tuesday": "Thứ 3",
+    "Wednesday": "Thứ 4",
+    "Thursday": "Thứ 5",
+    "Friday": "Thứ 6",
+    "Saturday": "Thứ 7",
+    "Sunday": "Chủ nhật"
+}
+
 def convert_day_to_vietnamese(english_day):
-    days_mapping = {
-        "Monday": "Thứ 2",
-        "Tuesday": "Thứ 3",
-        "Wednesday": "Thứ 4",
-        "Thursday": "Thứ 5",
-        "Friday": "Thứ 6",
-        "Saturday": "Thứ 7",
-        "Sunday": "Chủ nhật"
-    }
-    return days_mapping.get(english_day, english_day)  # Trả về ngày đã chuyển đổi hoặc giữ nguyên nếu không tìm thấy
+    return _DAYS_MAPPING.get(english_day, english_day)
 
 # Lưu dữ liệu session
 user_sessions = {}
@@ -427,15 +407,11 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()  # Kết nối Firestore
 
 def save_user_to_db(session_id, user_data):
-    """Cập nhật thông tin đặt lịch vào Firestore nếu tài liệu đã tồn tại"""
+    """Lưu hoặc cập nhật thông tin đặt lịch vào Firestore"""
     try:
         doc_ref = db.collection("appointments").document(session_id)
-        if doc_ref.get().exists:  # Kiểm tra xem tài liệu đã tồn tại chưa
-            doc_ref.update(user_data)
-            logging.info(f"✅ Dữ liệu đã được cập nhật vào Firestore: {user_data}")
-        else:
-            logging.warning(f"⚠️ Tài liệu không tồn tại, tạo mới với session_id: {session_id}")
-            doc_ref.set(user_data)  # Nếu không tồn tại, tạo mới tài liệu
+        doc_ref.set(user_data, merge=True)
+        logging.info(f"✅ Dữ liệu đã được lưu vào Firestore: {user_data}")
     except Exception as e:
         logging.error(f"❌ Lỗi khi lưu dữ liệu vào Firestore: {e}")
 
@@ -773,6 +749,7 @@ def sync_doctor_calendar():
         errors = 0
         skipped_date = 0
         skipped_exists = 0
+        pending_updates = {}  # appt_id -> google event id, committed as a batch at the end
         
         current_date_str = datetime.now().strftime("%Y-%m-%d")
         logging.info(f"📅 Ngày hiện tại: {current_date_str}")
@@ -798,14 +775,25 @@ def sync_doctor_calendar():
             event_result = create_calendar_event(appt_data, token_info)
             
             if event_result:
-                db.collection("appointments").document(appt_id).update({
-                    "googleEventId": event_result.get('id')
-                })
+                pending_updates[appt_id] = event_result.get('id')
                 count += 1
                 logging.info(f"✅ Đồng bộ thành công: {appt_id}")
             else:
                 errors += 1
                 logging.error(f"❌ Đồng bộ thất bại: {appt_id}")
+
+        # Commit all googleEventId updates in a single batch
+        if pending_updates:
+            try:
+                batch = db.batch()
+                for appt_id, event_id in pending_updates.items():
+                    batch.update(
+                        db.collection("appointments").document(appt_id),
+                        {"googleEventId": event_id}
+                    )
+                batch.commit()
+            except Exception as e:
+                logging.error(f"❌ Lỗi khi commit batch cập nhật googleEventId: {e}")
 
         logging.info(f"🏁 Kết quả đồng bộ: Thành công={count}, Lỗi={errors}, Bỏ qua (Qúa khứ)={skipped_date}, Bỏ qua (Đã có)={skipped_exists}")
 

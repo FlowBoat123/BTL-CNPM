@@ -1,5 +1,12 @@
 import csv
 import logging
+import threading
+from datetime import datetime, timedelta
+
+_services_cache = None
+_services_cache_time = None
+_SERVICES_CACHE_TTL = timedelta(minutes=5)
+_services_cache_lock = threading.Lock()
 
 def import_services_from_csv(db, csv_path):
     """
@@ -46,22 +53,34 @@ def import_services_from_csv(db, csv_path):
 def get_services(db):
     """
     Fetches all services from Firestore 'services' collection.
+    Results are cached in memory for up to 5 minutes to reduce repeated reads.
+    Thread-safe via a module-level lock.
     Returns a list of dictionaries.
     """
-    try:
-        services_ref = db.collection('services')
-        docs = services_ref.stream()
-        services = []
-        for doc in docs:
-            services.append(doc.to_dict())
-        
-        # Sort by ID numerically if possible
+    global _services_cache, _services_cache_time
+    now = datetime.now()
+    with _services_cache_lock:
+        if (
+            _services_cache is not None
+            and _services_cache_time is not None
+            and now - _services_cache_time < _SERVICES_CACHE_TTL
+        ):
+            return _services_cache
+
         try:
-            services.sort(key=lambda x: int(x.get('id', 0)))
-        except ValueError:
-            pass # Keep default order if id is not int
-            
-        return services
-    except Exception as e:
-        logging.error(f"Error fetching services: {e}")
-        return []
+            services_ref = db.collection('services')
+            docs = services_ref.stream()
+            services = [doc.to_dict() for doc in docs]
+
+            # Sort by ID numerically if possible
+            try:
+                services.sort(key=lambda x: int(x.get('id', 0)))
+            except ValueError:
+                pass  # Keep default order if id is not int
+
+            _services_cache = services
+            _services_cache_time = now
+            return services
+        except Exception as e:
+            logging.error(f"Error fetching services: {e}")
+            return []
