@@ -1,0 +1,620 @@
+{
+  "meta": {
+    "base_url": "http://127.0.0.1:5000",
+    "concurrency": 12,
+    "retry": 1,
+    "warmup": 4,
+    "config": "tests/pyresttest/concurrent_suite.yaml"
+  },
+  "summary": {
+    "total": 60,
+    "passed": 60,
+    "failed": 0,
+    "wall_time_ms": 2412.4331999919377,
+    "p50_ms": 16.636949992971495,
+    "p95_ms": 1205.5961200036108,
+    "p99_ms": 1215.5751390088699
+  },
+  "results": [
+    {
+      "name": "send_verification_missing_fields_x10",
+      "method": "POST",
+      "path": "/send-verification-email",
+      "ok": true,
+      "status_code": 400,
+      "elapsed_ms": 8.121899998513982,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "send_verification_missing_fields_x10",
+      "method": "POST",
+      "path": "/send-verification-email",
+      "ok": true,
+      "status_code": 400,
+      "elapsed_ms": 7.504100009100512,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "confirm_invalid_token_x10",
+      "method": "GET",
+      "path": "/confirm-appointment?token=invalid-token",
+      "ok": true,
+      "status_code": 400,
+      "elapsed_ms": 5.424400005722418,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "send_verification_missing_fields_x10",
+      "method": "POST",
+      "path": "/send-verification-email",
+      "ok": true,
+      "status_code": 400,
+      "elapsed_ms": 5.395199987106025,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "webhook_fallback_x20",
+      "method": "POST",
+      "path": "/webhook",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 12.886299984529614,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "send_verification_missing_fields_x10",
+      "method": "POST",
+      "path": "/send-verification-email",
+      "ok": true,
+      "status_code": 400,
+      "elapsed_ms": 11.679000017466024,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "confirm_invalid_token_x10",
+      "method": "GET",
+      "path": "/confirm-appointment?token=invalid-token",
+      "ok": true,
+      "status_code": 400,
+      "elapsed_ms": 12.43210001848638,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "confirm_invalid_token_x10",
+      "method": "GET",
+      "path": "/confirm-appointment?token=invalid-token",
+      "ok": true,
+      "status_code": 400,
+      "elapsed_ms": 12.527699989732355,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "webhook_fallback_x20",
+      "method": "POST",
+      "path": "/webhook",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 18.521199992392212,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "webhook_fallback_x20",
+      "method": "POST",
+      "path": "/webhook",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 16.77489999565296,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "send_verification_missing_fields_x10",
+      "method": "POST",
+      "path": "/send-verification-email",
+      "ok": true,
+      "status_code": 400,
+      "elapsed_ms": 16.012699983548373,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "webhook_fallback_x20",
+      "method": "POST",
+      "path": "/webhook",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 23.134200018830597,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "confirm_invalid_token_x10",
+      "method": "GET",
+      "path": "/confirm-appointment?token=invalid-token",
+      "ok": true,
+      "status_code": 400,
+      "elapsed_ms": 14.214199996786192,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "assign_doctor_method_guard_x5",
+      "method": "GET",
+      "path": "/assign-doctor",
+      "ok": true,
+      "status_code": 405,
+      "elapsed_ms": 16.478999983519316,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "confirm_invalid_token_x10",
+      "method": "GET",
+      "path": "/confirm-appointment?token=invalid-token",
+      "ok": true,
+      "status_code": 400,
+      "elapsed_ms": 12.9138000193052,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "send_verification_missing_fields_x10",
+      "method": "POST",
+      "path": "/send-verification-email",
+      "ok": true,
+      "status_code": 400,
+      "elapsed_ms": 16.799300006823614,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "webhook_fallback_x20",
+      "method": "POST",
+      "path": "/webhook",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 10.598399996524677,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "confirm_invalid_token_x10",
+      "method": "GET",
+      "path": "/confirm-appointment?token=invalid-token",
+      "ok": true,
+      "status_code": 400,
+      "elapsed_ms": 8.978900004876778,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "webhook_fallback_x20",
+      "method": "POST",
+      "path": "/webhook",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 6.997399992542341,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "webhook_fallback_x20",
+      "method": "POST",
+      "path": "/webhook",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 8.973200019681826,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "webhook_fallback_x20",
+      "method": "POST",
+      "path": "/webhook",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 9.219500003382564,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "webhook_fallback_x20",
+      "method": "POST",
+      "path": "/webhook",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 8.537399990018457,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "confirm_invalid_token_x10",
+      "method": "GET",
+      "path": "/confirm-appointment?token=invalid-token",
+      "ok": true,
+      "status_code": 400,
+      "elapsed_ms": 20.00769998994656,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "webhook_fallback_x20",
+      "method": "POST",
+      "path": "/webhook",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 5.425500014098361,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "send_verification_missing_fields_x10",
+      "method": "POST",
+      "path": "/send-verification-email",
+      "ok": true,
+      "status_code": 400,
+      "elapsed_ms": 19.101199985016137,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "webhook_fallback_x20",
+      "method": "POST",
+      "path": "/webhook",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 27.044499991461635,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "webhook_fallback_x20",
+      "method": "POST",
+      "path": "/webhook",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 26.044500002171844,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "webhook_fallback_x20",
+      "method": "POST",
+      "path": "/webhook",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 4.976199998054653,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "assign_doctor_method_guard_x5",
+      "method": "GET",
+      "path": "/assign-doctor",
+      "ok": true,
+      "status_code": 405,
+      "elapsed_ms": 4.571900004521012,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "confirm_invalid_token_x10",
+      "method": "GET",
+      "path": "/confirm-appointment?token=invalid-token",
+      "ok": true,
+      "status_code": 400,
+      "elapsed_ms": 11.164600000483915,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "assign_doctor_method_guard_x5",
+      "method": "GET",
+      "path": "/assign-doctor",
+      "ok": true,
+      "status_code": 405,
+      "elapsed_ms": 24.429400014923885,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "webhook_fallback_x20",
+      "method": "POST",
+      "path": "/webhook",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 22.35320000909269,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "confirm_invalid_token_x10",
+      "method": "GET",
+      "path": "/confirm-appointment?token=invalid-token",
+      "ok": true,
+      "status_code": 400,
+      "elapsed_ms": 4.6756000083405524,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "assign_doctor_method_guard_x5",
+      "method": "GET",
+      "path": "/assign-doctor",
+      "ok": true,
+      "status_code": 405,
+      "elapsed_ms": 3.6242999776732177,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "send_verification_missing_fields_x10",
+      "method": "POST",
+      "path": "/send-verification-email",
+      "ok": true,
+      "status_code": 400,
+      "elapsed_ms": 29.148800007533282,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "webhook_fallback_x20",
+      "method": "POST",
+      "path": "/webhook",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 20.714800019050017,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "api_services_x15",
+      "method": "GET",
+      "path": "/api/services",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 308.62519997754134,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "assign_doctor_method_guard_x5",
+      "method": "GET",
+      "path": "/assign-doctor",
+      "ok": true,
+      "status_code": 405,
+      "elapsed_ms": 19.265900016762316,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "send_verification_missing_fields_x10",
+      "method": "POST",
+      "path": "/send-verification-email",
+      "ok": true,
+      "status_code": 400,
+      "elapsed_ms": 15.802099980646744,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "webhook_fallback_x20",
+      "method": "POST",
+      "path": "/webhook",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 15.47980000032112,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "webhook_fallback_x20",
+      "method": "POST",
+      "path": "/webhook",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 15.286399982869625,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "api_services_x15",
+      "method": "GET",
+      "path": "/api/services",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 1183.9400999888312,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "api_services_x15",
+      "method": "GET",
+      "path": "/api/services",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 1199.59169998765,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "api_services_x15",
+      "method": "GET",
+      "path": "/api/services",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 1207.876500004204,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "send_verification_missing_fields_x10",
+      "method": "POST",
+      "path": "/send-verification-email",
+      "ok": true,
+      "status_code": 400,
+      "elapsed_ms": 3.802199993515387,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "webhook_fallback_x20",
+      "method": "POST",
+      "path": "/webhook",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 28.32370001124218,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "webhook_fallback_x20",
+      "method": "POST",
+      "path": "/webhook",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 4.787300014868379,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "api_services_x15",
+      "method": "GET",
+      "path": "/api/services",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 1202.4284999934025,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "api_services_x15",
+      "method": "GET",
+      "path": "/api/services",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 1179.9173000035807,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "api_services_x15",
+      "method": "GET",
+      "path": "/api/services",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 1205.4761000035796,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "confirm_invalid_token_x10",
+      "method": "GET",
+      "path": "/confirm-appointment?token=invalid-token",
+      "ok": true,
+      "status_code": 400,
+      "elapsed_ms": 16.49899999029003,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "webhook_fallback_x20",
+      "method": "POST",
+      "path": "/webhook",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 24.311999994097278,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "api_services_x15",
+      "method": "GET",
+      "path": "/api/services",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 1218.7421999988146,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "api_services_x15",
+      "method": "GET",
+      "path": "/api/services",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 1213.3743000158574,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "api_services_x15",
+      "method": "GET",
+      "path": "/api/services",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 1191.5832000086084,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "api_services_x15",
+      "method": "GET",
+      "path": "/api/services",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 1150.621200009482,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "api_services_x15",
+      "method": "GET",
+      "path": "/api/services",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 945.4280000063591,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "api_services_x15",
+      "method": "GET",
+      "path": "/api/services",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 1203.6402999947313,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "api_services_x15",
+      "method": "GET",
+      "path": "/api/services",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 372.33280000509694,
+      "error": null,
+      "response_snippet": null
+    },
+    {
+      "name": "api_services_x15",
+      "method": "GET",
+      "path": "/api/services",
+      "ok": true,
+      "status_code": 200,
+      "elapsed_ms": 1196.6508000041358,
+      "error": null,
+      "response_snippet": null
+    }
+  ]
+}

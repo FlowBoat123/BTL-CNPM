@@ -1,0 +1,73 @@
+- config:
+    testset: Dental Clinic API - Happy Path 200 Suite
+    timeout: 30
+    concurrency: 1
+    retry: 1
+    backoff_initial: 0.25
+    backoff_factor: 2
+
+- test:
+    name: 200_api_services_has_data
+    method: GET
+    url: /api/services
+    expected_status:
+      - 200
+    validators:
+      - compare:
+          jsonpath_mini: status
+          comparator: eq
+          expected: success
+      - compare:
+          jsonpath_mini: count
+          comparator: gt
+          expected: 0
+
+- test:
+    name: 200_webhook_make_appointment_valid_future
+    method: POST
+    url: /webhook
+    expected_status:
+      - 200
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/test-happy-200-session","queryResult":{"intent":{"displayName":"make_appointment"},"queryText":"toi muon dat lich nho rang luc 10 gio ngay 30 thang 12 nam 2099","parameters":{"date":"2099-12-30T10:00:00+07:00","hour":"2099-12-30T10:00:00+07:00","service":"Nho rang"}}}'
+
+- test:
+    name: 200_webhook_personal_info_after_make_appointment
+    method: POST
+    url: /webhook
+    expected_status:
+      - 200
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/test-happy-200-session","queryResult":{"intent":{"displayName":"ask_personal_info"},"queryText":"Ten toi la Test Happy 200, so dien thoai 0123456789","parameters":{"name":{"name":"Test Happy 200"},"sdt":"0123456789"}}}'
+
+- test:
+    name: 200_assign_doctor_same_doctor_no_calendar_side_effect
+    method: POST
+    url: /assign-doctor
+    expected_status:
+      - 200
+    headers:
+      Content-Type: application/json
+    body: '{"appointmentId":"test_e2e_assign_same_doctor","doctorId":"hC1kDpvF7It8suxOayV9"}'
+    validators:
+      - compare:
+          jsonpath_mini: status
+          comparator: eq
+          expected: success
+
+- test:
+    name: 200_complete_appointment_creates_bill
+    method: POST
+    url: /api/doctor/complete-appointment
+    expected_status:
+      - 200
+    headers:
+      Content-Type: application/json
+    body: '{"appointmentId":"test_e2e_complete_appointment","doctorId":"hC1kDpvF7It8suxOayV9","services":[{"id":"1","quantity":1}]}'
+    validators:
+      - compare:
+          jsonpath_mini: status
+          comparator: eq
+          expected: success

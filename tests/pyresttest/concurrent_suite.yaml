@@ -1,0 +1,48 @@
+- config:
+    concurrency: 12
+    retry: 1
+    testset: Dental Clinic API - Concurrent Performance Suite
+    timeout: 30
+    warmup: 4
+- test:
+    body: '{"session":"projects/demo/agent/sessions/bench-1","queryResult":{"intent":{"displayName":"unknown_intent"},"queryText":"xin
+      chao","parameters":{}}}'
+    expected_status:
+    - 200
+    headers:
+      Content-Type: application/json
+    iterations: 20
+    method: POST
+    name: webhook_fallback_x20
+    url: /webhook
+- test:
+    body: '{}'
+    expected_status:
+    - 400
+    headers:
+      Content-Type: application/json
+    iterations: 10
+    method: POST
+    name: send_verification_missing_fields_x10
+    url: /send-verification-email
+- test:
+    expected_status:
+    - 400
+    iterations: 10
+    method: GET
+    name: confirm_invalid_token_x10
+    url: /confirm-appointment?token=benchmark-invalid-token
+- test:
+    expected_status:
+    - 405
+    iterations: 5
+    method: GET
+    name: assign_doctor_method_guard_x5
+    url: /assign-doctor
+- test:
+    expected_status:
+    - 200
+    iterations: 15
+    method: GET
+    name: api_services_x15
+    url: /api/services

@@ -1,0 +1,810 @@
+{
+  "meta": {
+    "base_url": "http://127.0.0.1:5000",
+    "mode": "sync",
+    "file_concurrency": 3,
+    "files": [
+      "tests\\pyresttest\\smoke.yaml",
+      "tests\\pyresttest\\full_suite_12.yaml",
+      "tests\\pyresttest\\api_suite.yaml"
+    ]
+  },
+  "summary": {
+    "total": 44,
+    "passed": 44,
+    "failed": 0,
+    "wall_time_ms": 1551.5469000019948,
+    "p50_ms": 15.666500003135297,
+    "p95_ms": 32.62430000177119,
+    "p99_ms": 1071.3962000008905
+  },
+  "suites": [
+    {
+      "meta": {
+        "file": "tests\\pyresttest\\smoke.yaml",
+        "mode": "sync",
+        "config": {
+          "testset": "Dental Clinic API - Quick Smoke Tests",
+          "timeout": 20.0,
+          "concurrency": 1,
+          "retry": 0,
+          "backoff_initial": 0.25,
+          "backoff_factor": 2.0,
+          "backoff_max": 5.0,
+          "warmup": 0
+        }
+      },
+      "summary": {
+        "total": 3,
+        "passed": 3,
+        "failed": 0,
+        "wall_time_ms": 71.60750000184635,
+        "p50_ms": 22.876800001540687,
+        "p95_ms": 28.507499999250285,
+        "p99_ms": 28.507499999250285
+      },
+      "results": [
+        {
+          "name": "01_webhook_fallback_200",
+          "source": "tests\\pyresttest\\smoke.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/webhook",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 22.876800001540687,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "02_send_verification_empty_400",
+          "source": "tests\\pyresttest\\smoke.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/send-verification-email",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 28.507499999250285,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "03_confirm_invalid_token_400",
+          "source": "tests\\pyresttest\\smoke.yaml",
+          "method": "GET",
+          "url": "http://127.0.0.1:5000/confirm-appointment?token=invalid-token",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 13.788399999612011,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        }
+      ]
+    },
+    {
+      "meta": {
+        "file": "tests\\pyresttest\\full_suite_12.yaml",
+        "mode": "sync",
+        "config": {
+          "testset": "Dental Clinic API - Core Suite (12 cases)",
+          "timeout": 20.0,
+          "concurrency": 1,
+          "retry": 0,
+          "backoff_initial": 0.25,
+          "backoff_factor": 2.0,
+          "backoff_max": 5.0,
+          "warmup": 0
+        }
+      },
+      "summary": {
+        "total": 12,
+        "passed": 12,
+        "failed": 0,
+        "wall_time_ms": 514.7083999981987,
+        "p50_ms": 16.196600001421757,
+        "p95_ms": 32.62430000177119,
+        "p99_ms": 296.9470000025467
+      },
+      "results": [
+        {
+          "name": "01_webhook_fallback_200",
+          "source": "tests\\pyresttest\\full_suite_12.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/webhook",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 13.11320000240812,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "02_webhook_make_appt_missing_fields",
+          "source": "tests\\pyresttest\\full_suite_12.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/webhook",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 29.013499995926395,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "03_send_verification_empty_400",
+          "source": "tests\\pyresttest\\full_suite_12.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/send-verification-email",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 12.736899996525608,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "04_send_verification_invalid_email_400",
+          "source": "tests\\pyresttest\\full_suite_12.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/send-verification-email",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 6.005100003676489,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "05_confirm_invalid_token_400",
+          "source": "tests\\pyresttest\\full_suite_12.yaml",
+          "method": "GET",
+          "url": "http://127.0.0.1:5000/confirm-appointment?token=invalid-token",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 24.210399998992216,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "06_auth_google_missing_doctorId_400",
+          "source": "tests\\pyresttest\\full_suite_12.yaml",
+          "method": "GET",
+          "url": "http://127.0.0.1:5000/auth/google",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 15.64420000067912,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "07_oauth2callback_missing_params_400",
+          "source": "tests\\pyresttest\\full_suite_12.yaml",
+          "method": "GET",
+          "url": "http://127.0.0.1:5000/oauth2callback",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 16.196600001421757,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "08_assign_doctor_empty_400",
+          "source": "tests\\pyresttest\\full_suite_12.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/assign-doctor",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 15.968700005032588,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "09_sync_calendar_empty_400",
+          "source": "tests\\pyresttest\\full_suite_12.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/api/doctor/sync-calendar",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 32.62430000177119,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "10_api_services_reachable",
+          "source": "tests\\pyresttest\\full_suite_12.yaml",
+          "method": "GET",
+          "url": "http://127.0.0.1:5000/api/services",
+          "expected_status": [
+            200,
+            500
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 296.9470000025467,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "11_complete_appt_empty_400",
+          "source": "tests\\pyresttest\\full_suite_12.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/api/doctor/complete-appointment",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 24.489199997333344,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "12_assign_doctor_get_405",
+          "source": "tests\\pyresttest\\full_suite_12.yaml",
+          "method": "GET",
+          "url": "http://127.0.0.1:5000/assign-doctor",
+          "expected_status": [
+            405
+          ],
+          "status_code": 405,
+          "ok": true,
+          "elapsed_ms": 14.674799997010268,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        }
+      ]
+    },
+    {
+      "meta": {
+        "file": "tests\\pyresttest\\api_suite.yaml",
+        "mode": "sync",
+        "config": {
+          "testset": "Dental Clinic API - Comprehensive Suite (30+ cases)",
+          "timeout": 30.0,
+          "concurrency": 1,
+          "retry": 0,
+          "backoff_initial": 0.25,
+          "backoff_factor": 2.0,
+          "backoff_max": 5.0,
+          "warmup": 0
+        }
+      },
+      "summary": {
+        "total": 29,
+        "passed": 29,
+        "failed": 0,
+        "wall_time_ms": 1532.0132999986527,
+        "p50_ms": 15.509800003201235,
+        "p95_ms": 31.47319999698084,
+        "p99_ms": 1071.3962000008905
+      },
+      "results": [
+        {
+          "name": "01_webhook_fallback_200",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/webhook",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 11.818599996331614,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "02_webhook_make_appt_no_datetime",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/webhook",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 31.47319999698084,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "03_webhook_make_appt_no_service",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/webhook",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 26.437800006533507,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "04_webhook_ask_weather_no_location",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/webhook",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 5.068799997388851,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "05_webhook_invalid_body",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/webhook",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 5.491199997777585,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "10_send_verification_empty",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/send-verification-email",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 19.979299999249633,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "11_send_verification_missing_name",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/send-verification-email",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 15.045400003145915,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "12_send_verification_invalid_email",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/send-verification-email",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 16.362100002879743,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "13_send_verification_missing_phone",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/send-verification-email",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 30.062400001042988,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "14_send_verification_missing_service",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/send-verification-email",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 13.86409999395255,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "15_send_verification_email_no_at",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/send-verification-email",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 16.11649999540532,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "20_confirm_missing_token",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "GET",
+          "url": "http://127.0.0.1:5000/confirm-appointment",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 13.505099996109493,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "21_confirm_invalid_token",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "GET",
+          "url": "http://127.0.0.1:5000/confirm-appointment?token=invalid-token-12345",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 16.290999999910127,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "30_auth_google_missing_doctorId",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "GET",
+          "url": "http://127.0.0.1:5000/auth/google",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 15.023899999505375,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "31_oauth2callback_missing_params",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "GET",
+          "url": "http://127.0.0.1:5000/oauth2callback",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 14.636299994890578,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "32_oauth2callback_missing_code",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "GET",
+          "url": "http://127.0.0.1:5000/oauth2callback?state=doctor123",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 15.417700000398327,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "40_assign_doctor_empty",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/assign-doctor",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 16.25229999626754,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "41_assign_doctor_missing_apptId",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/assign-doctor",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 15.666500003135297,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "42_assign_doctor_missing_docId",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/assign-doctor",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 15.105599995877128,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "50_sync_calendar_empty",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/api/doctor/sync-calendar",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 15.522499998041894,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "51_sync_calendar_empty_doctorId",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/api/doctor/sync-calendar",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 14.51459999952931,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "60_api_services_success",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "GET",
+          "url": "http://127.0.0.1:5000/api/services",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 1071.3962000008905,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "70_complete_appt_empty",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/api/doctor/complete-appointment",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 18.15649999480229,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "71_complete_appt_missing_apptId",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/api/doctor/complete-appointment",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 5.55039999744622,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "72_complete_appt_missing_docId",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/api/doctor/complete-appointment",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 26.654699999198783,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "80_assign_doctor_get_405",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "GET",
+          "url": "http://127.0.0.1:5000/assign-doctor",
+          "expected_status": [
+            405
+          ],
+          "status_code": 405,
+          "ok": true,
+          "elapsed_ms": 14.053099999728147,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "81_webhook_put_405",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "PUT",
+          "url": "http://127.0.0.1:5000/webhook",
+          "expected_status": [
+            405
+          ],
+          "status_code": 405,
+          "ok": true,
+          "elapsed_ms": 15.509800003201235,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "82_api_services_delete_405",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "DELETE",
+          "url": "http://127.0.0.1:5000/api/services",
+          "expected_status": [
+            405
+          ],
+          "status_code": 405,
+          "ok": true,
+          "elapsed_ms": 16.18160000361968,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "90_root_endpoint",
+          "source": "tests\\pyresttest\\api_suite.yaml",
+          "method": "GET",
+          "url": "http://127.0.0.1:5000/",
+          "expected_status": [
+            200,
+            404
+          ],
+          "status_code": 404,
+          "ok": true,
+          "elapsed_ms": 15.137700000195764,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        }
+      ]
+    }
+  ]
+}
