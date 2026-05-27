@@ -1,0 +1,241 @@
+{
+  "meta": {
+    "base_url": "http://127.0.0.1:5000",
+    "mode": "sync",
+    "file_concurrency": 1,
+    "files": [
+      "tests\\pyresttest\\clinic_service_workflow_suite.yaml"
+    ]
+  },
+  "summary": {
+    "total": 12,
+    "passed": 12,
+    "failed": 0,
+    "wall_time_ms": 5397.825099993497,
+    "p50_ms": 278.111900028307,
+    "p95_ms": 817.6802000380121,
+    "p99_ms": 819.1072000190616
+  },
+  "suites": [
+    {
+      "meta": {
+        "file": "tests\\pyresttest\\clinic_service_workflow_suite.yaml",
+        "mode": "sync",
+        "config": {
+          "testset": "Dental Clinic API - Clinic Service Workflow Suite",
+          "timeout": 30.0,
+          "concurrency": 1,
+          "retry": 1,
+          "backoff_initial": 0.25,
+          "backoff_factor": 2.0,
+          "backoff_max": 5.0,
+          "warmup": 0,
+          "variable_binds": {}
+        }
+      },
+      "summary": {
+        "total": 12,
+        "passed": 12,
+        "failed": 0,
+        "wall_time_ms": 5353.587299992796,
+        "p50_ms": 278.111900028307,
+        "p95_ms": 817.6802000380121,
+        "p99_ms": 819.1072000190616
+      },
+      "results": [
+        {
+          "name": "200_api_services_has_data",
+          "source": "tests\\pyresttest\\clinic_service_workflow_suite.yaml",
+          "method": "GET",
+          "url": "http://127.0.0.1:5000/api/services",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 264.66200000140816,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "200_webhook_make_appointment_valid_future",
+          "source": "tests\\pyresttest\\clinic_service_workflow_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/webhook",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 258.993899973575,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "200_webhook_make_appointment_duplicate_slot_rejected",
+          "source": "tests\\pyresttest\\clinic_service_workflow_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/webhook",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 278.111900028307,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "200_webhook_personal_info_after_make_appointment",
+          "source": "tests\\pyresttest\\clinic_service_workflow_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/webhook",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 534.7907000104897,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "200_webhook_make_appointment_for_string_name",
+          "source": "tests\\pyresttest\\clinic_service_workflow_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/webhook",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 242.30230000102893,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "200_webhook_personal_info_name_string_after_make_appointment",
+          "source": "tests\\pyresttest\\clinic_service_workflow_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/webhook",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 537.6364000258036,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "200_assign_doctor_same_doctor_no_calendar_side_effect",
+          "source": "tests\\pyresttest\\clinic_service_workflow_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/assign-doctor",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 263.0428000120446,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "200_assign_doctor_unassigned_without_calendar_token",
+          "source": "tests\\pyresttest\\clinic_service_workflow_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/assign-doctor",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 800.813100009691,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "400_sync_calendar_doctor_without_google_token",
+          "source": "tests\\pyresttest\\clinic_service_workflow_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/api/doctor/sync-calendar",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 267.8707999875769,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "403_complete_appointment_wrong_doctor",
+          "source": "tests\\pyresttest\\clinic_service_workflow_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/api/doctor/complete-appointment",
+          "expected_status": [
+            403
+          ],
+          "status_code": 403,
+          "ok": true,
+          "elapsed_ms": 267.0982999843545,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "200_complete_appointment_single_service_creates_bill",
+          "source": "tests\\pyresttest\\clinic_service_workflow_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/api/doctor/complete-appointment",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 817.6802000380121,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "200_complete_appointment_multiple_services_calculates_bill",
+          "source": "tests\\pyresttest\\clinic_service_workflow_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/api/doctor/complete-appointment",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 819.1072000190616,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        }
+      ]
+    }
+  ]
+}

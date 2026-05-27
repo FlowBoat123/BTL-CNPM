@@ -27,7 +27,16 @@
         jsonpath_mini: status
 - test:
     expected_status:
-    - 400
+    - 200
     method: GET
-    name: 03_confirm_invalid_token_400
-    url: /confirm-appointment?token=invalid-token
+    name: 03_api_services_has_data_200
+    url: /api/services
+    validators:
+    - compare:
+        comparator: eq
+        expected: success
+        jsonpath_mini: status
+    - compare:
+        comparator: gt
+        expected: 0
+        jsonpath_mini: count

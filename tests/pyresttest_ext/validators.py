@@ -82,7 +82,19 @@ def validate_response(response: dict[str, Any], validators: Iterable[dict[str, A
                     )
             except Exception as exc:
                 failures.append(f"validator error: {exc}")
+        elif "extract_test" in validator:
+            config = validator["extract_test"] or {}
+            test = str(config.get("test", "exists")).lower()
+            try:
+                actual = _extract(response, config)
+                if test == "exists" and actual is None:
+                    failures.append(f"extract_test failed: expected value to exist for {config}")
+                elif test in {"not_empty", "notempty"} and not actual:
+                    failures.append(f"extract_test failed: expected non-empty value for {config}")
+                elif test not in {"exists", "not_empty", "notempty"}:
+                    failures.append(f"unsupported extract_test: {test}")
+            except Exception as exc:
+                failures.append(f"extract_test error: {exc}")
         else:
             failures.append(f"unsupported validator: {validator}")
     return failures
-

@@ -18,6 +18,7 @@ class SuiteConfig:
     backoff_factor: float = 2.0
     backoff_max: float = 5.0
     warmup: int = 0
+    variable_binds: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
@@ -27,9 +28,11 @@ class TestCase:
     url: str
     expected_status: list[int]
     headers: dict[str, str] = field(default_factory=dict)
-    body: str | None = None
+    body: Any = None
     validators: list[dict[str, Any]] = field(default_factory=list)
+    extract_binds: list[dict[str, Any]] = field(default_factory=list)
     iterations: int = 1
+    follow_redirects: bool = True
     source: str = ""
 
 
@@ -66,6 +69,7 @@ def _parse_config(raw: Any) -> SuiteConfig:
         backoff_factor=float(data.get("backoff_factor", data.get("retry_backoff_factor", 2.0))),
         backoff_max=float(data.get("backoff_max", data.get("retry_backoff_max", 5.0))),
         warmup=max(0, int(data.get("warmup", 0))),
+        variable_binds=dict(data.get("variable_binds") or {}),
     )
 
 
@@ -78,14 +82,22 @@ def _parse_test(raw: Any, base_url: str, source: str) -> TestCase:
     return TestCase(
         name=str(data.get("name", data.get("url", "Unnamed"))),
         method=str(data.get("method", "GET")).upper(),
-        url=urljoin(base_url.rstrip("/") + "/", str(data["url"]).lstrip("/")),
+        url=urljoin(base_url.rstrip("/") + "/", str(_template_source(data["url"])).lstrip("/")),
         expected_status=[int(status) for status in expected],
         headers={str(key): str(value) for key, value in (data.get("headers") or {}).items()},
         body=data.get("body"),
         validators=list(data.get("validators") or []),
+        extract_binds=list(data.get("extract_binds") or []),
         iterations=max(1, int(iterations)),
+        follow_redirects=bool(data.get("follow_redirects", True)),
         source=source,
     )
+
+
+def _template_source(value: Any) -> Any:
+    if isinstance(value, dict) and "template" in value:
+        return value["template"]
+    return value
 
 
 def load_suite(path: str | Path, base_url: str) -> TestSuite:

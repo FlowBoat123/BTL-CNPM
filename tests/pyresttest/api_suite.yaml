@@ -1,0 +1,437 @@
+- config:
+    testset: Dental Clinic API - Contract and Validation Suite
+    timeout: 30
+    variable_binds:
+      doctor_email: abc123@gmail.com
+      doctor_password: "123456"
+
+- test:
+    name: 01_webhook_fallback_contract_200
+    method: POST
+    url: /webhook
+    expected_status:
+      - 200
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/api-contract-1","queryResult":{"intent":{"displayName":"unknown_intent"},"queryText":"xin chao","parameters":{}}}'
+    validators:
+      - compare:
+          raw_body: ""
+          comparator: contains
+          expected: fulfillmentText
+
+- test:
+    name: 02_webhook_make_appointment_missing_datetime_200
+    method: POST
+    url: /webhook
+    expected_status:
+      - 200
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/api-contract-2","queryResult":{"intent":{"displayName":"make_appointment"},"queryText":"toi muon dat lich","parameters":{"service":"Nho rang"}}}'
+    validators:
+      - compare:
+          raw_body: ""
+          comparator: contains
+          expected: fulfillmentText
+
+- test:
+    name: 02a_webhook_make_appointment_missing_service_200
+    method: POST
+    url: /webhook
+    expected_status:
+      - 200
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/api-contract-make-missing-service","queryResult":{"intent":{"displayName":"make_appointment"},"queryText":"toi muon dat lich luc 10 gio ngay 30 thang 12 nam 2099","parameters":{"date":"2099-12-30T10:00:00+07:00","hour":"2099-12-30T10:00:00+07:00"}}}'
+    validators:
+      - compare:
+          raw_body: ""
+          comparator: contains
+          expected: fulfillmentText
+
+- test:
+    name: 02b_webhook_make_appointment_midnight_rejected_200
+    method: POST
+    url: /webhook
+    expected_status:
+      - 200
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/api-contract-make-midnight","queryResult":{"intent":{"displayName":"make_appointment"},"queryText":"toi muon dat lich nho rang luc nua dem ngay 30 thang 12 nam 2099","parameters":{"date":"2099-12-30T00:00:00+07:00","hour":"2099-12-30T00:00:00+07:00","service":"Nho rang"}}}'
+    validators:
+      - compare:
+          raw_body: ""
+          comparator: contains
+          expected: fulfillmentText
+
+- test:
+    name: 02c_webhook_make_appointment_after_hours_rejected_200
+    method: POST
+    url: /webhook
+    expected_status:
+      - 200
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/api-contract-make-after-hours","queryResult":{"intent":{"displayName":"make_appointment"},"queryText":"toi muon dat lich nho rang luc 18 gio 30 ngay 30 thang 12 nam 2099","parameters":{"date":"2099-12-30T18:30:00+07:00","hour":"2099-12-30T18:30:00+07:00","service":"Nho rang"}}}'
+    validators:
+      - compare:
+          raw_body: ""
+          comparator: contains
+          expected: fulfillmentText
+
+- test:
+    name: 02d_webhook_make_appointment_past_datetime_rejected_200
+    method: POST
+    url: /webhook
+    expected_status:
+      - 200
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/api-contract-make-past","queryResult":{"intent":{"displayName":"make_appointment"},"queryText":"toi muon dat lich nho rang luc 10 gio ngay 1 thang 1 nam 2000","parameters":{"date":"2000-01-01T10:00:00+07:00","hour":"2000-01-01T10:00:00+07:00","service":"Nho rang"}}}'
+    validators:
+      - compare:
+          raw_body: ""
+          comparator: contains
+          expected: fulfillmentText
+
+- test:
+    name: 02e_webhook_make_appointment_invalid_datetime_rejected_200
+    method: POST
+    url: /webhook
+    expected_status:
+      - 200
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/api-contract-make-invalid-date","queryResult":{"intent":{"displayName":"make_appointment"},"queryText":"toi muon dat lich nho rang voi ngay sai dinh dang","parameters":{"date":"not-a-date","hour":"not-a-time","service":"Nho rang"}}}'
+    validators:
+      - compare:
+          raw_body: ""
+          comparator: contains
+          expected: fulfillmentText
+
+- test:
+    name: 02f_webhook_ask_personal_info_missing_name_200
+    method: POST
+    url: /webhook
+    expected_status:
+      - 200
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/api-contract-personal-missing-name","queryResult":{"intent":{"displayName":"ask_personal_info"},"queryText":"so dien thoai cua toi la 0123456789","parameters":{"sdt":"0123456789"}}}'
+    validators:
+      - compare:
+          raw_body: ""
+          comparator: contains
+          expected: fulfillmentText
+
+- test:
+    name: 02g_webhook_ask_personal_info_missing_phone_200
+    method: POST
+    url: /webhook
+    expected_status:
+      - 200
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/api-contract-personal-missing-phone","queryResult":{"intent":{"displayName":"ask_personal_info"},"queryText":"ten toi la Nguyen Van A","parameters":{"name":{"name":"Nguyen Van A"}}}}'
+    validators:
+      - compare:
+          raw_body: ""
+          comparator: contains
+          expected: fulfillmentText
+
+- test:
+    name: 02h_webhook_ask_personal_info_without_appointment_session_200
+    method: POST
+    url: /webhook
+    expected_status:
+      - 200
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/api-contract-personal-no-appointment","queryResult":{"intent":{"displayName":"ask_personal_info"},"queryText":"ten toi la Nguyen Van A, so dien thoai 0123456789","parameters":{"name":{"name":"Nguyen Van A"},"sdt":"0123456789"}}}'
+    validators:
+      - compare:
+          raw_body: ""
+          comparator: contains
+          expected: fulfillmentText
+
+- test:
+    name: 03_send_verification_missing_fields_400
+    method: POST
+    url: /send-verification-email
+    expected_status:
+      - 400
+    headers:
+      Content-Type: application/json
+    body: '{}'
+    validators:
+      - compare:
+          jsonpath_mini: status
+          comparator: eq
+          expected: error
+
+- test:
+    name: 04_send_verification_invalid_email_400
+    method: POST
+    url: /send-verification-email
+    expected_status:
+      - 400
+    headers:
+      Content-Type: application/json
+    body: '{"patientName":"Test User","email":"invalid-email","phone":"0123456789","date":"2099-12-30","time":"10:00","day":"Thu 4","service":"Nho rang"}'
+    validators:
+      - compare:
+          jsonpath_mini: status
+          comparator: eq
+          expected: error
+
+- test:
+    name: 07_google_auth_missing_doctor_id_400
+    method: GET
+    url: /auth/google
+    expected_status:
+      - 400
+
+- test:
+    name: 08_oauth_callback_missing_code_or_state_400
+    method: GET
+    url: /oauth2callback
+    expected_status:
+      - 400
+
+- test:
+    name: 09_assign_doctor_missing_fields_400
+    method: POST
+    url: /assign-doctor
+    expected_status:
+      - 400
+    headers:
+      Content-Type: application/json
+    body: '{}'
+    validators:
+      - compare:
+          jsonpath_mini: status
+          comparator: eq
+          expected: error
+
+- test:
+    name: 10_assign_doctor_unknown_appointment_404
+    method: POST
+    url: /assign-doctor
+    expected_status:
+      - 404
+    headers:
+      Content-Type: application/json
+    body: '{"appointmentId":"test_missing_appointment","doctorId":"hC1kDpvF7It8suxOayV9"}'
+    validators:
+      - compare:
+          jsonpath_mini: status
+          comparator: eq
+          expected: error
+
+- test:
+    name: 11_sync_calendar_missing_doctor_id_400
+    method: POST
+    url: /api/doctor/sync-calendar
+    expected_status:
+      - 400
+    headers:
+      Content-Type: application/json
+    body: '{}'
+    validators:
+      - compare:
+          jsonpath_mini: status
+          comparator: eq
+          expected: error
+
+- test:
+    name: 12_sync_calendar_unknown_doctor_404
+    method: POST
+    url: /api/doctor/sync-calendar
+    expected_status:
+      - 404
+    headers:
+      Content-Type: application/json
+    body: '{"doctorId":"test_missing_doctor"}'
+    validators:
+      - compare:
+          jsonpath_mini: status
+          comparator: eq
+          expected: error
+
+- test:
+    name: 13_services_contract_200
+    method: GET
+    url: /api/services
+    expected_status:
+      - 200
+    validators:
+      - compare:
+          jsonpath_mini: status
+          comparator: eq
+          expected: success
+      - compare:
+          jsonpath_mini: count
+          comparator: gt
+          expected: 0
+
+- test:
+    name: 14_complete_appointment_missing_fields_400
+    method: POST
+    url: /api/doctor/complete-appointment
+    expected_status:
+      - 400
+    headers:
+      Content-Type: application/json
+    body: '{}'
+    validators:
+      - compare:
+          jsonpath_mini: status
+          comparator: eq
+          expected: error
+
+- test:
+    name: 15_complete_appointment_unknown_appointment_404
+    method: POST
+    url: /api/doctor/complete-appointment
+    expected_status:
+      - 404
+    headers:
+      Content-Type: application/json
+    body: '{"appointmentId":"test_missing_appointment","doctorId":"hC1kDpvF7It8suxOayV9","services":[]}'
+    validators:
+      - compare:
+          jsonpath_mini: status
+          comparator: eq
+          expected: error
+
+- test:
+    name: 16_assign_doctor_method_guard_405
+    method: GET
+    url: /assign-doctor
+    expected_status:
+      - 405
+
+- test:
+    name: 17_webhook_method_guard_405
+    method: PUT
+    url: /webhook
+    expected_status:
+      - 405
+    headers:
+      Content-Type: application/json
+    body: '{}'
+
+- test:
+    name: 18_services_method_guard_405
+    method: DELETE
+    url: /api/services
+    expected_status:
+      - 405
+
+- test:
+    name: 19_send_verification_null_json_should_400
+    method: POST
+    url: /send-verification-email
+    expected_status:
+      - 400
+    headers:
+      Content-Type: application/json
+    body: 'null'
+    validators:
+      - compare:
+          jsonpath_mini: status
+          comparator: eq
+          expected: error
+
+- test:
+    name: 20_assign_doctor_null_json_should_400
+    method: POST
+    url: /assign-doctor
+    expected_status:
+      - 400
+    headers:
+      Content-Type: application/json
+    body: 'null'
+    validators:
+      - compare:
+          jsonpath_mini: status
+          comparator: eq
+          expected: error
+
+- test:
+    name: 21_complete_appointment_null_json_should_400
+    method: POST
+    url: /api/doctor/complete-appointment
+    expected_status:
+      - 400
+    headers:
+      Content-Type: application/json
+    body: 'null'
+    validators:
+      - compare:
+          jsonpath_mini: status
+          comparator: eq
+          expected: error
+
+- test:
+    name: 22_doctor_login_extract_identity
+    method: POST
+    url: /api/doctor/login
+    expected_status:
+      - 200
+    headers:
+      Content-Type: application/json
+    body:
+      template: '{"email":"$doctor_email","password":"$doctor_password"}'
+    validators:
+      - compare:
+          jsonpath_mini: status
+          comparator: eq
+          expected: success
+      - compare:
+          jsonpath_mini: doctor.email
+          comparator: str_eq
+          expected:
+            template: $doctor_email
+      - extract_test:
+          jsonpath_mini: doctorId
+          test: exists
+      - extract_test:
+          jsonpath_mini: doctor.name
+          test: exists
+    extract_binds:
+      - doctor_id:
+          jsonpath_mini: doctorId
+      - login_email:
+          jsonpath_mini: doctor.email
+      - login_name:
+          jsonpath_mini: doctor.name
+
+- test:
+    name: 23_doctor_profile_uses_extracted_doctor_id
+    method: GET
+    url:
+      template: /api/doctor/profile/$doctor_id
+    expected_status:
+      - 200
+    validators:
+      - compare:
+          jsonpath_mini: status
+          comparator: eq
+          expected: success
+      - compare:
+          jsonpath_mini: doctor.id
+          comparator: str_eq
+          expected:
+            template: $doctor_id
+      - compare:
+          jsonpath_mini: doctor.email
+          comparator: str_eq
+          expected:
+            template: $login_email
+      - compare:
+          jsonpath_mini: doctor.name
+          comparator: str_eq
+          expected:
+            template: $login_name

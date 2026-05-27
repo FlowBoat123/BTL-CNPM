@@ -46,11 +46,27 @@ Async mode requires `aiohttp`:
   http://127.0.0.1:5000 `
   tests\pyresttest\smoke.yaml `
   tests\pyresttest\api_suite.yaml `
-  tests\pyresttest\full_suite_12.yaml `
   --mode sync `
-  --file-concurrency 3 `
+  --file-concurrency 2 `
   --report tests\reports\advanced_all_report.json
 ```
+
+## Run External Dependencies
+
+External dependencies are isolated in `tests/pyresttest/external_suite.yaml`
+because they can be slower or flaky due to network, quota, token, or provider
+availability.
+
+```powershell
+.\.venv\Scripts\python.exe -m tests.pyresttest_ext.runner `
+  http://127.0.0.1:5000 `
+  tests\pyresttest\external_suite.yaml `
+  --mode sync `
+  --report tests\reports\external_report.json
+```
+
+This suite checks OpenWeather, Deepseek, and Google OAuth redirect through the
+backend. It intentionally does not call SendGrid email sending by default.
 
 ## Supported YAML keys
 
@@ -103,24 +119,24 @@ endpoint:
 - `flaky`: retry rate exceeds the configured threshold
 - `broken`: failure rate exceeds the configured threshold
 
-## Firebase-Backed Happy Path 200 Tests
+## Firebase-Backed Clinic Service Workflow Suite
 
-These tests seed deterministic Firestore documents, run the 200-only API suite,
+These tests seed deterministic Firestore documents, run the clinic service workflow suite,
 then cleanup the test documents and generated bills.
 
 ```powershell
-.\.venv\Scripts\python.exe -m tests.pyresttest_ext.firebase_happy_200 run `
+.\.venv\Scripts\python.exe -m tests.pyresttest_ext.clinic_service_workflow run `
   --base-url http://127.0.0.1:5000 `
-  --report tests\reports\happy_200_report.json
+  --report tests\reports\clinic_service_workflow_report.json
 ```
 
-The suite uses `tests/pyresttest/happy_200_suite.yaml`.
+The suite uses `tests/pyresttest/clinic_service_workflow_suite.yaml`.
 
 The seeded appointment IDs are:
 
 - `test_e2e_assign_same_doctor`
 - `test_e2e_complete_appointment`
-- `test-happy-200-session`
+- `test-clinic-workflow-session`
 
 The assign-doctor test uses an appointment that is already assigned to the test
 doctor so the backend returns `200` without creating a Google Calendar event.
