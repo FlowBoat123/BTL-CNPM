@@ -1,0 +1,150 @@
+- config:
+    testset: Dental Clinic API - Native PyRestTest Benchmark Suite
+    timeout: 45
+
+- benchmark:
+    name: api_services_read_benchmark_x180
+    method: GET
+    url: /api/services
+    warmup_runs: 10
+    benchmark_runs: 180
+    metrics:
+      - total_time: mean
+      - total_time: median
+      - total_time: std_deviation
+      - starttransfer_time: mean
+
+- benchmark:
+    name: webhook_fallback_contract_benchmark_x120
+    method: POST
+    url: /webhook
+    warmup_runs: 10
+    benchmark_runs: 120
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/benchmark-fallback","queryResult":{"intent":{"displayName":"unknown_intent"},"queryText":"xin chao","parameters":{}}}'
+    metrics:
+      - total_time: mean
+      - total_time: median
+      - total_time: std_deviation
+      - starttransfer_time: mean
+
+- benchmark:
+    name: webhook_make_appointment_missing_datetime_benchmark_x90
+    method: POST
+    url: /webhook
+    warmup_runs: 10
+    benchmark_runs: 90
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/benchmark-missing-datetime","queryResult":{"intent":{"displayName":"make_appointment"},"queryText":"toi muon dat lich","parameters":{"service":"Nho rang"}}}'
+    metrics:
+      - total_time: mean
+      - total_time: median
+      - total_time: std_deviation
+      - starttransfer_time: mean
+
+- benchmark:
+    name: webhook_make_appointment_missing_service_benchmark_x80
+    method: POST
+    url: /webhook
+    warmup_runs: 10
+    benchmark_runs: 80
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/benchmark-missing-service","queryResult":{"intent":{"displayName":"make_appointment"},"queryText":"toi muon dat lich luc 10 gio ngay 30 thang 12 nam 2099","parameters":{"date":"2099-12-30T10:00:00+07:00","hour":"2099-12-30T10:00:00+07:00"}}}'
+    metrics:
+      - total_time: mean
+      - total_time: median
+      - total_time: std_deviation
+      - starttransfer_time: mean
+
+- benchmark:
+    name: webhook_make_appointment_after_hours_benchmark_x70
+    method: POST
+    url: /webhook
+    warmup_runs: 10
+    benchmark_runs: 70
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/benchmark-after-hours","queryResult":{"intent":{"displayName":"make_appointment"},"queryText":"toi muon dat lich nho rang luc 18 gio 30 ngay 30 thang 12 nam 2099","parameters":{"date":"2099-12-30T18:30:00+07:00","hour":"2099-12-30T18:30:00+07:00","service":"Nho rang"}}}'
+    metrics:
+      - total_time: mean
+      - total_time: median
+      - total_time: std_deviation
+      - starttransfer_time: mean
+
+- benchmark:
+    name: webhook_personal_info_missing_phone_benchmark_x60
+    method: POST
+    url: /webhook
+    warmup_runs: 10
+    benchmark_runs: 60
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/benchmark-personal-missing-phone","queryResult":{"intent":{"displayName":"ask_personal_info"},"queryText":"ten toi la Nguyen Van A","parameters":{"name":{"name":"Nguyen Van A"}}}}'
+    metrics:
+      - total_time: mean
+      - total_time: median
+      - total_time: std_deviation
+      - starttransfer_time: mean
+
+- benchmark:
+    name: send_verification_missing_fields_benchmark_x50
+    method: POST
+    url: /send-verification-email
+    warmup_runs: 10
+    benchmark_runs: 50
+    headers:
+      Content-Type: application/json
+    body: '{}'
+    metrics:
+      - total_time: mean
+      - total_time: median
+      - total_time: std_deviation
+      - starttransfer_time: mean
+
+- benchmark:
+    name: assign_doctor_missing_fields_benchmark_x40
+    method: POST
+    url: /assign-doctor
+    warmup_runs: 10
+    benchmark_runs: 40
+    headers:
+      Content-Type: application/json
+    body: '{}'
+    metrics:
+      - total_time: mean
+      - total_time: median
+      - total_time: std_deviation
+      - starttransfer_time: mean
+
+- benchmark:
+    name: sync_calendar_missing_doctor_id_benchmark_x30
+    method: POST
+    url: /api/doctor/sync-calendar
+    warmup_runs: 10
+    benchmark_runs: 30
+    headers:
+      Content-Type: application/json
+    body: '{}'
+    metrics:
+      - total_time: mean
+      - total_time: median
+      - total_time: std_deviation
+      - starttransfer_time: mean
+
+- benchmark:
+    name: complete_appointment_missing_fields_benchmark_x30
+    method: POST
+    url: /api/doctor/complete-appointment
+    warmup_runs: 10
+    benchmark_runs: 30
+    headers:
+      Content-Type: application/json
+    body: '{}'
+    metrics:
+      - total_time: mean
+      - total_time: median
+      - total_time: std_deviation
+      - starttransfer_time: mean
