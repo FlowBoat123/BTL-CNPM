@@ -1,0 +1,96 @@
+{
+  "meta": {
+    "base_url": "http://127.0.0.1:5000",
+    "mode": "sync",
+    "file_concurrency": 1,
+    "files": [
+      "tests\\pyresttest\\smoke.yaml"
+    ]
+  },
+  "summary": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "wall_time_ms": 50.15819999971427,
+    "p50_ms": 14.740400001755916,
+    "p95_ms": 25.94350000435952,
+    "p99_ms": 25.94350000435952
+  },
+  "suites": [
+    {
+      "meta": {
+        "file": "tests\\pyresttest\\smoke.yaml",
+        "mode": "sync",
+        "config": {
+          "testset": "Dental Clinic API - Quick Smoke Tests",
+          "timeout": 20.0,
+          "concurrency": 1,
+          "retry": 0,
+          "backoff_initial": 0.25,
+          "backoff_factor": 2.0,
+          "backoff_max": 5.0,
+          "warmup": 0
+        }
+      },
+      "summary": {
+        "total": 3,
+        "passed": 3,
+        "failed": 0,
+        "wall_time_ms": 48.392500000773,
+        "p50_ms": 14.740400001755916,
+        "p95_ms": 25.94350000435952,
+        "p99_ms": 25.94350000435952
+      },
+      "results": [
+        {
+          "name": "01_webhook_fallback_200",
+          "source": "tests\\pyresttest\\smoke.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/webhook",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 6.21240001055412,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "02_send_verification_empty_400",
+          "source": "tests\\pyresttest\\smoke.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/send-verification-email",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 25.94350000435952,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "03_confirm_invalid_token_400",
+          "source": "tests\\pyresttest\\smoke.yaml",
+          "method": "GET",
+          "url": "http://127.0.0.1:5000/confirm-appointment?token=invalid-token",
+          "expected_status": [
+            400
+          ],
+          "status_code": 400,
+          "ok": true,
+          "elapsed_ms": 14.740400001755916,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        }
+      ]
+    }
+  ]
+}

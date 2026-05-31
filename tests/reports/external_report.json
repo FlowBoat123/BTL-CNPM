@@ -1,0 +1,113 @@
+{
+  "meta": {
+    "base_url": "http://127.0.0.1:5000",
+    "mode": "sync",
+    "file_concurrency": 1,
+    "files": [
+      "tests\\pyresttest\\external_suite.yaml"
+    ]
+  },
+  "summary": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "wall_time_ms": 1721.7330999555998,
+    "p50_ms": 563.6097000096925,
+    "p95_ms": 586.9104000157677,
+    "p99_ms": 586.9104000157677
+  },
+  "suites": [
+    {
+      "meta": {
+        "file": "tests\\pyresttest\\external_suite.yaml",
+        "mode": "sync",
+        "config": {
+          "testset": "Dental Clinic API - External Dependencies Suite",
+          "timeout": 45.0,
+          "concurrency": 1,
+          "retry": 2,
+          "backoff_initial": 1.0,
+          "backoff_factor": 2.0,
+          "backoff_max": 8.0,
+          "warmup": 0,
+          "variable_binds": {}
+        }
+      },
+      "summary": {
+        "total": 4,
+        "passed": 4,
+        "failed": 0,
+        "wall_time_ms": 1718.2528999983333,
+        "p50_ms": 563.6097000096925,
+        "p95_ms": 586.9104000157677,
+        "p99_ms": 586.9104000157677
+      },
+      "results": [
+        {
+          "name": "external_openweather_ask_weather_200",
+          "source": "tests\\pyresttest\\external_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/webhook",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 541.7404000181705,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "external_deepseek_dental_info_200",
+          "source": "tests\\pyresttest\\external_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/webhook",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 563.6097000096925,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "external_deepseek_clinic_info_200",
+          "source": "tests\\pyresttest\\external_suite.yaml",
+          "method": "POST",
+          "url": "http://127.0.0.1:5000/webhook",
+          "expected_status": [
+            200
+          ],
+          "status_code": 200,
+          "ok": true,
+          "elapsed_ms": 586.9104000157677,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        },
+        {
+          "name": "external_google_oauth_redirect_302",
+          "source": "tests\\pyresttest\\external_suite.yaml",
+          "method": "GET",
+          "url": "http://127.0.0.1:5000/auth/google?doctorId=hC1kDpvF7It8suxOayV9",
+          "expected_status": [
+            302
+          ],
+          "status_code": 302,
+          "ok": true,
+          "elapsed_ms": 25.65980004146695,
+          "attempts": 1,
+          "error": null,
+          "failures": [],
+          "response_snippet": null
+        }
+      ]
+    }
+  ]
+}

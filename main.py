@@ -287,12 +287,12 @@ def handle_make_appointment(req):
         start_time = 9 * 60   # 9:00 sáng = 540 phút
         end_time = 17 * 60    # 17:00 chiều = 1020 phút
 
-        # Kiểm tra nếu giờ là 00:00 (chưa điền giờ cụ thể)
+        # Kiểm tra nếu giờ là 00:00 (nửa đêm - không hợp lệ)
         if hour_minutes == 0:
-            return {"fulfillmentText": "Vui lòng cho biết giờ bạn muốn đặt lịch (từ 9:00 sáng đến 17:00 chiều). Ví dụ: 9 giờ sáng, 14 giờ chiều, 17 giờ."}
+            return {"fulfillmentText": "⚠️ Phòng khám không làm việc lúc nửa đêm. Giờ làm việc từ 9:00 sáng đến 17:00 chiều (5 giờ chiều). Vui lòng chọn giờ hợp lệ, ví dụ: 9 giờ sáng, 2 giờ chiều, 5 giờ chiều."}
         
         if not (start_time <= hour_minutes <= end_time):
-            return {"fulfillmentText": "Giờ đặt lịch phải từ 9:00 sáng đến 17:00 chiều. Vui lòng chọn lại giờ khác."}
+            return {"fulfillmentText": f"⚠️ Giờ {hour_str} không trong giờ làm việc của phòng khám. Vui lòng chọn giờ từ 9:00 sáng đến 17:00 chiều (5 giờ chiều). Ví dụ: 9 giờ sáng, 10 giờ sáng, 2 giờ chiều, 5 giờ chiều."}
 
         # Kiểm tra thời gian có trong tương lai không
         appointment_time_str = f"{date_str} {hour_str}"  # "2025-07-15 09:00"
@@ -323,15 +323,18 @@ def handle_make_appointment(req):
         "day": day_of_week,  # Thêm thông tin thứ trong tuần
         "service": service,
         "patientName": None,
-        "sdt": None
+        "sdt": None,
+        "waitingForPersonalInfo": True  # Đánh dấu đang chờ thông tin cá nhân
     }
 
     logging.info(f"Session data updated: {user_sessions[session_id]}")
 
     response = (
-        f"✅ Đã đặt lịch hẹn cho bạn vào lúc {hour_str} ngày {date_str} "
-        f"({day_of_week}) với dịch vụ {service}. "
-        f"Vui lòng cung cấp thêm thông tin (tên, số điện thoại) để xác nhận."
+        f"✅ Đã ghi nhận lịch hẹn: {hour_str} ngày {date_str} ({day_of_week}) - Dịch vụ: {service}.\n\n"
+        f"🔸 Để hoàn tất đặt lịch, vui lòng cung cấp:\n"
+        f"• Họ tên của bạn\n"
+        f"• Số điện thoại\n\n"
+        f'Ví dụ: "Tên tôi là Nguyễn Văn A, số điện thoại 0987654321"'
     )
     
     return {"fulfillmentText": response}
@@ -377,11 +380,52 @@ def handle_intent(intent, parameters, user_message, session_id):
     """Xử lý intent và lưu trạng thái theo session_id"""
     
     # Khởi tạo session nếu chưa có
-    # if session_id not in user_sessions:
-    #     user_sessions[session_id] = {'patientName': None, 'sdt': None, 'note': []}
+    if session_id not in user_sessions:
+        user_sessions[session_id] = {'patientName': None, 'sdt': None, 'note': [], 'waitingForPersonalInfo': False}
 
     user_data = user_sessions[session_id]
     logging.info(f"Current session data: {user_data}")
+    
+    # Xử lý Default Fallback Intent khi đang chờ thông tin cá nhân
+    if intent == "Default Fallback Intent" and user_data.get('waitingForPersonalInfo'):
+        logging.info(f"Attempting to extract personal info from fallback message: {user_message}")
+        
+        # Thử trích xuất số điện thoại từ tin nhắn
+        phone_match = re.search(r'(0\d{9}|\+84\d{9})', user_message)
+        
+        if phone_match:
+            phone = phone_match.group(1)
+            user_sessions[session_id]['sdt'] = phone
+            logging.info(f"Extracted phone: {phone}")
+            
+            # Nếu chưa có tên, yêu cầu tên
+            if not user_data.get('patientName'):
+                return {"fulfillmentText": f"✅ Đã ghi nhận số điện thoại: {phone}. Vui lòng cho biết họ tên của bạn?"}
+        
+        # Nếu đã có cả tên và số điện thoại
+        if user_data.get('patientName') and user_data.get('sdt'):
+            user_sessions[session_id]['waitingForPersonalInfo'] = False
+            save_user_to_db(session_id, user_sessions[session_id])
+            user_info = user_sessions[session_id]
+            return {
+                "fulfillmentText": (
+                    f"✅ Cảm ơn {user_info.get('patientName')}! Thông tin đã được lưu:\n\n"
+                    f"📅 Ngày: {user_info.get('date')} ({user_info.get('day')})\n"
+                    f"🕐 Giờ: {user_info.get('time')}\n"
+                    f"🦷 Dịch vụ: {user_info.get('service')}\n"
+                    f"📞 SĐT: {user_info.get('sdt')}\n\n"
+                    "Phòng khám sẽ liên hệ với bạn để xác nhận chi tiết. Hẹn gặp lại!"
+                )
+            }
+        
+        # Nếu vẫn thiếu thông tin
+        missing = []
+        if not user_data.get('patientName'):
+            missing.append("họ tên")
+        if not user_data.get('sdt'):
+            missing.append("số điện thoại")
+        
+        return {"fulfillmentText": f'🔸 Vui lòng cung cấp {" và ".join(missing)} để hoàn tất đặt lịch. Ví dụ: "Tên tôi là Nguyễn Văn A, số điện thoại 0987654321"'}
 
     if intent == "ask_personal_info":
         name_data = parameters.get('name', '')  
@@ -397,11 +441,12 @@ def handle_intent(intent, parameters, user_message, session_id):
 
         # Kiểm tra xem session_id đã tồn tại trong user_sessions chưa
         if session_id not in user_sessions:
-            return {"fulfillmentText": "Lỗi: Chưa có thông tin về ngày, giờ và dịch vụ!"}
+            return {"fulfillmentText": '⚠️ Lỗi: Chưa có thông tin về lịch hẹn. Vui lòng đặt lịch lại bằng cách nói "Tôi muốn đặt lịch"'}
 
         # Cập nhật thông tin người dùng vào session
         user_sessions[session_id]["patientName"] = name
         user_sessions[session_id]["sdt"] = sdt
+        user_sessions[session_id]["waitingForPersonalInfo"] = False
 
         # Lấy toàn bộ thông tin đã có
         user_info = user_sessions[session_id]
@@ -412,7 +457,14 @@ def handle_intent(intent, parameters, user_message, session_id):
         save_user_to_db(session_id, user_info)
 
         return {
-            "fulfillmentText": "Cảm ơn bạn! Tất cả thông tin đã được lưu. Bạn sẽ nhận được xác nhận lịch hẹn sớm!"
+            "fulfillmentText": (
+                f"✅ Cảm ơn {name}! Thông tin đã được lưu:\n\n"
+                f"📅 Ngày: {user_info.get('date')} ({user_info.get('day')})\n"
+                f"🕐 Giờ: {user_info.get('time')}\n"
+                f"🦷 Dịch vụ: {user_info.get('service')}\n"
+                f"📞 SĐT: {sdt}\n\n"
+                "Phòng khám sẽ liên hệ với bạn để xác nhận chi tiết. Hẹn gặp lại!"
+            )
         }
 
     return {"fulfillmentText": "Tôi không hiểu yêu cầu của bạn."}

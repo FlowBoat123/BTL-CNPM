@@ -1,0 +1,212 @@
+{
+  "meta": {
+    "reports": [
+      "tests\\reports\\advanced_concurrent_sync_report.json",
+      "tests\\reports\\advanced_concurrent_async_report.json",
+      "tests\\reports\\advanced_multi_file_report.json"
+    ],
+    "thresholds": {
+      "p95_ms": 1000.0,
+      "p99_ms": 2000.0,
+      "retry_rate": 0.05,
+      "failure_rate": 0.0
+    }
+  },
+  "summary": {
+    "total": 164,
+    "passed": 164,
+    "failed": 0,
+    "failure_rate": 0.0,
+    "retried": 0,
+    "retry_rate": 0.0,
+    "endpoint_count": 13,
+    "classifications": {
+      "slow": 1,
+      "stable": 12
+    }
+  },
+  "endpoints": [
+    {
+      "endpoint": "GET /api/services",
+      "total": 32,
+      "passed": 32,
+      "failed": 0,
+      "failure_rate": 0.0,
+      "retried": 0,
+      "retry_rate": 0.0,
+      "p50_ms": 3684.0142000000924,
+      "p95_ms": 4084.2129000011482,
+      "p99_ms": 4182.132599999022,
+      "max_ms": 4182.132599999022,
+      "classification": "slow"
+    },
+    {
+      "endpoint": "POST /api/doctor/sync-calendar",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "failure_rate": 0.0,
+      "retried": 0,
+      "retry_rate": 0.0,
+      "p50_ms": 15.522499998041894,
+      "p95_ms": 32.62430000177119,
+      "p99_ms": 32.62430000177119,
+      "max_ms": 32.62430000177119,
+      "classification": "stable"
+    },
+    {
+      "endpoint": "POST /webhook",
+      "total": 48,
+      "passed": 48,
+      "failed": 0,
+      "failure_rate": 0.0,
+      "retried": 0,
+      "retry_rate": 0.0,
+      "p50_ms": 19.39700000366429,
+      "p95_ms": 29.013499995926395,
+      "p99_ms": 37.658100001863204,
+      "max_ms": 37.658100001863204,
+      "classification": "stable"
+    },
+    {
+      "endpoint": "POST /send-verification-email",
+      "total": 29,
+      "passed": 29,
+      "failed": 0,
+      "failure_rate": 0.0,
+      "retried": 0,
+      "retry_rate": 0.0,
+      "p50_ms": 12.20659999671625,
+      "p95_ms": 28.507499999250285,
+      "p99_ms": 30.062400001042988,
+      "max_ms": 30.062400001042988,
+      "classification": "stable"
+    },
+    {
+      "endpoint": "POST /api/doctor/complete-appointment",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "failure_rate": 0.0,
+      "retried": 0,
+      "retry_rate": 0.0,
+      "p50_ms": 24.489199997333344,
+      "p95_ms": 26.654699999198783,
+      "p99_ms": 26.654699999198783,
+      "max_ms": 26.654699999198783,
+      "classification": "stable"
+    },
+    {
+      "endpoint": "GET /confirm-appointment",
+      "total": 24,
+      "passed": 24,
+      "failed": 0,
+      "failure_rate": 0.0,
+      "retried": 0,
+      "retry_rate": 0.0,
+      "p50_ms": 13.788399999612011,
+      "p95_ms": 23.857300002418924,
+      "p99_ms": 24.210399998992216,
+      "max_ms": 24.210399998992216,
+      "classification": "stable"
+    },
+    {
+      "endpoint": "GET /assign-doctor",
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "failure_rate": 0.0,
+      "retried": 0,
+      "retry_rate": 0.0,
+      "p50_ms": 13.558399994508363,
+      "p95_ms": 16.896900000574533,
+      "p99_ms": 20.809200002986472,
+      "max_ms": 20.809200002986472,
+      "classification": "stable"
+    },
+    {
+      "endpoint": "POST /assign-doctor",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "failure_rate": 0.0,
+      "retried": 0,
+      "retry_rate": 0.0,
+      "p50_ms": 15.968700005032588,
+      "p95_ms": 16.25229999626754,
+      "p99_ms": 16.25229999626754,
+      "max_ms": 16.25229999626754,
+      "classification": "stable"
+    },
+    {
+      "endpoint": "GET /oauth2callback",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "failure_rate": 0.0,
+      "retried": 0,
+      "retry_rate": 0.0,
+      "p50_ms": 15.417700000398327,
+      "p95_ms": 16.196600001421757,
+      "p99_ms": 16.196600001421757,
+      "max_ms": 16.196600001421757,
+      "classification": "stable"
+    },
+    {
+      "endpoint": "DELETE /api/services",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "failure_rate": 0.0,
+      "retried": 0,
+      "retry_rate": 0.0,
+      "p50_ms": 16.18160000361968,
+      "p95_ms": 16.18160000361968,
+      "p99_ms": 16.18160000361968,
+      "max_ms": 16.18160000361968,
+      "classification": "stable"
+    },
+    {
+      "endpoint": "GET /auth/google",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "failure_rate": 0.0,
+      "retried": 0,
+      "retry_rate": 0.0,
+      "p50_ms": 15.023899999505375,
+      "p95_ms": 15.64420000067912,
+      "p99_ms": 15.64420000067912,
+      "max_ms": 15.64420000067912,
+      "classification": "stable"
+    },
+    {
+      "endpoint": "PUT /webhook",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "failure_rate": 0.0,
+      "retried": 0,
+      "retry_rate": 0.0,
+      "p50_ms": 15.509800003201235,
+      "p95_ms": 15.509800003201235,
+      "p99_ms": 15.509800003201235,
+      "max_ms": 15.509800003201235,
+      "classification": "stable"
+    },
+    {
+      "endpoint": "GET /",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "failure_rate": 0.0,
+      "retried": 0,
+      "retry_rate": 0.0,
+      "p50_ms": 15.137700000195764,
+      "p95_ms": 15.137700000195764,
+      "p99_ms": 15.137700000195764,
+      "max_ms": 15.137700000195764,
+      "classification": "stable"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+- config:
+    testset: Dental Clinic API - Quick Smoke Tests
+    timeout: 20
+- test:
+    body: '{"session":"projects/demo/agent/sessions/smoke-1","queryResult":{"intent":{"displayName":"unknown_intent"},"queryText":"xin
+      chao","parameters":{}}}'
+    expected_status:
+    - 200
+    headers:
+      Content-Type: application/json
+    method: POST
+    name: 01_webhook_fallback_200
+    url: /webhook
+- test:
+    body: '{}'
+    expected_status:
+    - 400
+    headers:
+      Content-Type: application/json
+    method: POST
+    name: 02_send_verification_empty_400
+    url: /send-verification-email
+    validators:
+    - compare:
+        comparator: eq
+        expected: error
+        jsonpath_mini: status
+- test:
+    expected_status:
+    - 200
+    method: GET
+    name: 03_api_services_has_data_200
+    url: /api/services
+    validators:
+    - compare:
+        comparator: eq
+        expected: success
+        jsonpath_mini: status
+    - compare:
+        comparator: gt
+        expected: 0
+        jsonpath_mini: count

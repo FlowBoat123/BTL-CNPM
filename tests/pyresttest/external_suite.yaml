@@ -1,0 +1,66 @@
+- config:
+    testset: Dental Clinic API - External Dependencies Suite
+    timeout: 45
+    concurrency: 1
+    retry: 2
+    backoff_initial: 1
+    backoff_factor: 2
+    backoff_max: 8
+
+- test:
+    name: external_openweather_ask_weather_200
+    method: POST
+    url: /webhook
+    expected_status:
+      - 200
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/external-weather","queryResult":{"intent":{"displayName":"ask_weather"},"queryText":"thoi tiet Ha Noi hom nay","parameters":{"locate":"Hanoi"}}}'
+    validators:
+      - compare:
+          raw_body: ""
+          comparator: contains
+          expected: fulfillmentText
+
+- test:
+    name: external_deepseek_dental_info_200
+    method: POST
+    url: /webhook
+    expected_status:
+      - 200
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/external-deepseek-dental","queryResult":{"intent":{"displayName":"dental_info"},"queryText":"Sau khi nho rang can luu y gi","parameters":{}}}'
+    validators:
+      - compare:
+          raw_body: ""
+          comparator: contains
+          expected: fulfillmentText
+
+- test:
+    name: external_deepseek_clinic_info_200
+    method: POST
+    url: /webhook
+    expected_status:
+      - 200
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/external-deepseek-clinic","queryResult":{"intent":{"displayName":"chatbot_info"},"queryText":"Phong kham co dich vu gi","parameters":{}}}'
+    validators:
+      - compare:
+          raw_body: ""
+          comparator: contains
+          expected: fulfillmentText
+
+- test:
+    name: external_google_oauth_redirect_302
+    method: GET
+    url: /auth/google?doctorId=hC1kDpvF7It8suxOayV9
+    follow_redirects: false
+    expected_status:
+      - 302
+    validators:
+      - compare:
+          header: Location
+          comparator: contains
+          expected: accounts.google.com

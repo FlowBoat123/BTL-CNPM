@@ -1,0 +1,170 @@
+- config:
+    testset: Dental Clinic API - Realistic Concurrent Stability Suite
+    timeout: 45
+    concurrency: 48
+    retry: 1
+    backoff_initial: 0.25
+    backoff_factor: 2
+    backoff_max: 2
+    warmup: 10
+
+- test:
+    name: api_services_read_x180
+    method: GET
+    url: /api/services
+    expected_status:
+      - 200
+    iterations: 180
+    validators:
+      - compare:
+          jsonpath_mini: status
+          comparator: eq
+          expected: success
+      - compare:
+          jsonpath_mini: count
+          comparator: gt
+          expected: 0
+
+- test:
+    name: webhook_fallback_contract_x120
+    method: POST
+    url: /webhook
+    expected_status:
+      - 200
+    iterations: 120
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/concurrent-fallback","queryResult":{"intent":{"displayName":"unknown_intent"},"queryText":"xin chao","parameters":{}}}'
+    validators:
+      - compare:
+          raw_body: ""
+          comparator: contains
+          expected: fulfillmentText
+
+- test:
+    name: webhook_make_appointment_missing_datetime_x90
+    method: POST
+    url: /webhook
+    expected_status:
+      - 200
+    iterations: 90
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/concurrent-missing-datetime","queryResult":{"intent":{"displayName":"make_appointment"},"queryText":"toi muon dat lich","parameters":{"service":"Nho rang"}}}'
+    validators:
+      - compare:
+          raw_body: ""
+          comparator: contains
+          expected: fulfillmentText
+
+- test:
+    name: webhook_make_appointment_missing_service_x80
+    method: POST
+    url: /webhook
+    expected_status:
+      - 200
+    iterations: 80
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/concurrent-missing-service","queryResult":{"intent":{"displayName":"make_appointment"},"queryText":"toi muon dat lich luc 10 gio ngay 30 thang 12 nam 2099","parameters":{"date":"2099-12-30T10:00:00+07:00","hour":"2099-12-30T10:00:00+07:00"}}}'
+    validators:
+      - compare:
+          raw_body: ""
+          comparator: contains
+          expected: fulfillmentText
+
+- test:
+    name: webhook_make_appointment_after_hours_x70
+    method: POST
+    url: /webhook
+    expected_status:
+      - 200
+    iterations: 70
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/concurrent-after-hours","queryResult":{"intent":{"displayName":"make_appointment"},"queryText":"toi muon dat lich nho rang luc 18 gio 30 ngay 30 thang 12 nam 2099","parameters":{"date":"2099-12-30T18:30:00+07:00","hour":"2099-12-30T18:30:00+07:00","service":"Nho rang"}}}'
+    validators:
+      - compare:
+          raw_body: ""
+          comparator: contains
+          expected: fulfillmentText
+
+- test:
+    name: webhook_personal_info_missing_phone_x60
+    method: POST
+    url: /webhook
+    expected_status:
+      - 200
+    iterations: 60
+    headers:
+      Content-Type: application/json
+    body: '{"session":"projects/demo/agent/sessions/concurrent-personal-missing-phone","queryResult":{"intent":{"displayName":"ask_personal_info"},"queryText":"ten toi la Nguyen Van A","parameters":{"name":{"name":"Nguyen Van A"}}}}'
+    validators:
+      - compare:
+          raw_body: ""
+          comparator: contains
+          expected: fulfillmentText
+
+- test:
+    name: send_verification_missing_fields_x50
+    method: POST
+    url: /send-verification-email
+    expected_status:
+      - 400
+    iterations: 50
+    headers:
+      Content-Type: application/json
+    body: '{}'
+    validators:
+      - compare:
+          jsonpath_mini: status
+          comparator: eq
+          expected: error
+
+- test:
+    name: assign_doctor_missing_fields_x40
+    method: POST
+    url: /assign-doctor
+    expected_status:
+      - 400
+    iterations: 40
+    headers:
+      Content-Type: application/json
+    body: '{}'
+    validators:
+      - compare:
+          jsonpath_mini: status
+          comparator: eq
+          expected: error
+
+- test:
+    name: sync_calendar_missing_doctor_id_x30
+    method: POST
+    url: /api/doctor/sync-calendar
+    expected_status:
+      - 400
+    iterations: 30
+    headers:
+      Content-Type: application/json
+    body: '{}'
+    validators:
+      - compare:
+          jsonpath_mini: status
+          comparator: eq
+          expected: error
+
+- test:
+    name: complete_appointment_missing_fields_x30
+    method: POST
+    url: /api/doctor/complete-appointment
+    expected_status:
+      - 400
+    iterations: 30
+    headers:
+      Content-Type: application/json
+    body: '{}'
+    validators:
+      - compare:
+          jsonpath_mini: status
+          comparator: eq
+          expected: error
